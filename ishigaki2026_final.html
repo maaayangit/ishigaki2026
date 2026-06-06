@@ -192,6 +192,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   <button class="tab" onclick="sw('flight',this)"><i class="ti ti-plane"></i> フライト</button>
   <button class="tab" onclick="sw('hotel',this)"><i class="ti ti-building"></i> ホテル</button>
   <button class="tab" onclick="sw('faq',this)"><i class="ti ti-help"></i> FAQ</button>
+  <button class="tab" onclick="sw('settlement',this)"><i class="ti ti-calculator"></i> 精算</button>
 </div>
 
 <div id="sec-schedule" class="sec active">
@@ -330,16 +331,109 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   </div>
 </div>
 
-<div id="sec-faq" class="sec">
-  <div class="faq-cats">
-    <button class="faq-cat active" onclick="filterFaq('all',this)">すべて</button>
-    <button class="faq-cat" onclick="filterFaq('flight',this)"><i class="ti ti-plane" style="font-size:11px"></i> フライト</button>
-    <button class="faq-cat" onclick="filterFaq('hotel',this)"><i class="ti ti-building" style="font-size:11px"></i> ホテル</button>
-    <button class="faq-cat" onclick="filterFaq('schedule',this)"><i class="ti ti-calendar" style="font-size:11px"></i> 予定</button>
-    <button class="faq-cat" onclick="filterFaq('money',this)"><i class="ti ti-cash" style="font-size:11px"></i> お金</button>
-    <button class="faq-cat" onclick="filterFaq('gear',this)"><i class="ti ti-backpack" style="font-size:11px"></i> 持ち物</button>
+
+<div id="sec-settlement" class="sec">
+  <div style="background:#E1F5EE;border-radius:12px;padding:12px 14px;margin-bottom:12px;font-size:12px;color:#085041;display:flex;gap:8px;align-items:flex-start;">
+    <i class="ti ti-info-circle" style="font-size:14px;flex-shrink:0;margin-top:1px;"></i>
+    <div>Kashiwagi Mayaが全額立替済み。<strong>Onishi Familyの負担額</strong>を旅行後に精算してください。</div>
   </div>
-  <div id="faq-list"></div>
+
+  <div style="border:0.5px solid #d3d1c7;border-radius:12px;background:white;margin-bottom:8px;overflow:hidden;">
+    <div style="padding:11px 14px;border-bottom:0.5px solid #f0ede8;">
+      <div style="font-size:10px;color:#888780;margin-bottom:4px;">確定済み費用合計</div>
+      <div style="font-size:16px;font-weight:500;color:#1a1a1a;">497,442円</div>
+      <div style="font-size:11px;color:#888780;">フライト＋ホテル</div>
+    </div>
+    <div style="padding:11px 14px;">
+      <table style="width:100%;border-collapse:collapse;font-size:11px;">
+        <thead>
+          <tr>
+            <th style="text-align:left;color:#888780;font-weight:400;padding:4px 0;border-bottom:0.5px solid #f0ede8;">項目</th>
+            <th style="text-align:right;color:#888780;font-weight:400;padding:4px 0;border-bottom:0.5px solid #f0ede8;">合計</th>
+            <th style="text-align:right;color:#888780;font-weight:400;padding:4px 0;border-bottom:0.5px solid #f0ede8;">Onishi</th>
+            <th style="text-align:right;color:#888780;font-weight:400;padding:4px 0;border-bottom:0.5px solid #f0ede8;">Kashiwagi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:7px 0;border-bottom:0.5px solid #f0ede8;color:#1a1a1a;">ANA航空券<br><span style="font-size:10px;color:#888780;">実費按分</span></td>
+            <td style="text-align:right;padding:7px 0;border-bottom:0.5px solid #f0ede8;color:#1a1a1a;vertical-align:top;">238,289円</td>
+            <td style="text-align:right;padding:7px 0;border-bottom:0.5px solid #f0ede8;color:#1a1a1a;vertical-align:top;">114,906円</td>
+            <td style="text-align:right;padding:7px 0;border-bottom:0.5px solid #f0ede8;color:#1a1a1a;vertical-align:top;">123,383円</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 0;color:#1a1a1a;">730HOTELS<br><span style="font-size:10px;color:#888780;">1室貸切・家族2等分</span></td>
+            <td style="text-align:right;padding:7px 0;color:#1a1a1a;vertical-align:top;">259,153円</td>
+            <td style="text-align:right;padding:7px 0;color:#1a1a1a;vertical-align:top;">129,577円</td>
+            <td style="text-align:right;padding:7px 0;color:#1a1a1a;vertical-align:top;">129,576円</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td style="padding:8px 0;font-weight:500;color:#1a1a1a;border-top:0.5px solid #d3d1c7;">合計</td>
+            <td style="text-align:right;padding:8px 0;font-weight:500;color:#1a1a1a;border-top:0.5px solid #d3d1c7;">497,442円</td>
+            <td style="text-align:right;padding:8px 0;font-weight:500;color:#1a1a1a;border-top:0.5px solid #d3d1c7;">244,483円</td>
+            <td style="text-align:right;padding:8px 0;font-weight:500;color:#0F6E56;border-top:0.5px solid #d3d1c7;">252,959円</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+    <div style="border:0.5px solid #d3d1c7;border-radius:12px;background:white;overflow:hidden;">
+      <div style="padding:8px 12px;border-bottom:0.5px solid #f0ede8;background:#f5f5f0;">
+        <div style="font-size:10px;color:#888780;">Onishi Family 航空券</div>
+      </div>
+      <div style="padding:8px 12px;">
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <tr><td style="padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">HIROMASA（大人）</td><td style="text-align:right;padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">32,965円</td></tr>
+          <tr><td style="padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">KYONA（大人）</td><td style="text-align:right;padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">32,965円</td></tr>
+          <tr><td style="padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">KANNA（小児）</td><td style="text-align:right;padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">24,488円</td></tr>
+          <tr><td style="padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">RINKA（小児）</td><td style="text-align:right;padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">24,488円</td></tr>
+          <tr><td style="padding:4px 0;font-weight:500;color:#1a1a1a;border-top:0.5px solid #d3d1c7;">小計</td><td style="text-align:right;padding:4px 0;font-weight:500;color:#1a1a1a;">114,906円</td></tr>
+        </table>
+      </div>
+    </div>
+    <div style="border:0.5px solid #d3d1c7;border-radius:12px;background:white;overflow:hidden;">
+      <div style="padding:8px 12px;border-bottom:0.5px solid #f0ede8;background:#f5f5f0;">
+        <div style="font-size:10px;color:#888780;">Kashiwagi Family 航空券</div>
+      </div>
+      <div style="padding:8px 12px;">
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <tr><td style="padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">MAYA（大人）</td><td style="text-align:right;padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">32,965円</td></tr>
+          <tr><td style="padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">MIZUKI（大人）</td><td style="text-align:right;padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">32,965円</td></tr>
+          <tr><td style="padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">RIZU（大人扱い）</td><td style="text-align:right;padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">32,965円</td></tr>
+          <tr><td style="padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">SENA（小児）</td><td style="text-align:right;padding:3px 0;color:#1a1a1a;border-bottom:0.5px solid #f0ede8;">24,488円</td></tr>
+          <tr><td style="padding:4px 0;font-weight:500;color:#1a1a1a;border-top:0.5px solid #d3d1c7;">小計</td><td style="text-align:right;padding:4px 0;font-weight:500;color:#1a1a1a;">123,383円</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div style="border:2px solid #185FA5;border-radius:12px;background:white;margin-bottom:8px;padding:14px;">
+    <div style="font-size:10px;color:#888780;margin-bottom:6px;">Onishi Family 精算額（確定分）</div>
+    <div style="font-size:32px;font-weight:500;color:#185FA5;">244,483円</div>
+    <div style="font-size:11px;color:#888780;margin-top:4px;">旅行後にKashiwagi Mayaへ振込</div>
+  </div>
+
+  <div style="border:0.5px solid #d3d1c7;border-radius:12px;background:white;padding:12px 14px;">
+    <div style="font-size:10px;color:#888780;margin-bottom:8px;">今後追加予定の費用（予約確定後に更新）</div>
+    <div style="font-size:12px;color:#888780;display:flex;flex-direction:column;gap:6px;">
+      <div style="display:flex;justify-content:space-between;"><span>レンタカー（×2台）</span><span>予約準備中</span></div>
+      <div style="display:flex;justify-content:space-between;"><span>星空ナイトツアー</span><span>予約準備中</span></div>
+      <div style="display:flex;justify-content:space-between;"><span>マングローブカヌー</span><span>予約準備中</span></div>
+      <div style="display:flex;justify-content:space-between;"><span>唄もーれ（現地払い）</span><span>¥3,000/人</span></div>
+    </div>
+  </div>
+</div>
+
+<div id="sec-faq" class="sec">
+  <div style="border:0.5px dashed #b4b2a9;border-radius:12px;background:#f5f5f0;padding:24px 16px;text-align:center;">
+    <i class="ti ti-help" style="font-size:32px;color:#b4b2a9;display:block;margin-bottom:10px;"></i>
+    <div style="font-size:14px;font-weight:500;color:#888780;margin-bottom:6px;">FAQ 準備中</div>
+    <div style="font-size:12px;color:#888780;">チャット形式で質問できる機能を準備しています。<br>もうしばらくお待ちください！</div>
+  </div>
 </div>
 
 <script>
