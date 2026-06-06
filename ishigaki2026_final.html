@@ -234,7 +234,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   <button class="tab active" onclick="sw('schedule',this)"><i class="ti ti-calendar"></i> 旅程</button>
   <button class="tab" onclick="sw('flight',this)"><i class="ti ti-plane"></i> フライト</button>
   <button class="tab" onclick="sw('hotel',this)"><i class="ti ti-building"></i> ホテル</button>
-  <button class="tab" onclick="sw('map',this)"><i class="ti ti-map-pin"></i> 地図</button>
+  <button class="tab" onclick="openMapTab(this)"><i class="ti ti-map-pin"></i> 地図</button>
   <button class="tab" onclick="sw('faq',this)"><i class="ti ti-message-circle"></i> 質問する</button>
   <button class="tab" onclick="sw('settlement',this)"><i class="ti ti-calculator"></i> 精算</button>
 </div>
@@ -473,7 +473,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   </div>
 </div>
 
-
 <div id="sec-map" class="sec">
   <div class="map-filters">
     <button class="map-filter-btn" data-day="1" onclick="toggleMapDay(1,this)" style="color:#E07A5F;border-color:#E07A5F;background:rgba(224,122,95,.08)">1日目 11/3</button>
@@ -672,7 +671,6 @@ function updateCd(){
 }
 updateCd();setInterval(updateCd,60000);renderFaqs('all');
 </script>
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const MAP_COLORS={1:'#E07A5F',2:'#3D9EAD',3:'#52B788',4:'#845EC2',5:'#94A3B8'};
@@ -680,55 +678,62 @@ const MAP_DAY_NAMES={1:'11/3 到着・唄もーれ',2:'11/4 川平湾・米原�
 const MAP_VISIBLE={1:true,2:true,3:true,4:true,5:true};
 const MAP_SPOTS=[
   {day:1,name:'石垣空港',lat:24.3960,lng:124.2458,time:'14:55',icon:'✈️',desc:'羽田11:40発→14:55着。レンタカー2台受取'},
-  {day:1,name:'Sakura Cross Inn & Sauna Ishigaki',lat:24.3400,lng:124.1543,time:'16:30',icon:'🏠',desc:'4泊の拠点。評価5.0。サウナ付き。離島ターミナル徒歩5分'},
+  {day:1,name:'Sakura Cross Inn & Sauna',lat:24.3400,lng:124.1543,time:'16:30',icon:'🏠',desc:'4泊の拠点。サウナ付き。離島ターミナル徒歩5分'},
   {day:1,name:'唄もーれ',lat:24.3391,lng:124.1564,time:'19:00',icon:'🎵',desc:'三線ライブ+飲み放題 3,000円/人・現金のみ・要予約'},
   {day:2,name:'川平湾（グラスボート）',lat:24.4510,lng:124.1437,time:'10:00',icon:'🚤',desc:'グラスボート約30分。世界最高峰の透明度'},
-  {day:2,name:'米原ビーチ（シュノーケリング）',lat:24.4530,lng:124.1856,time:'11:30',icon:'🐟',desc:'シュノーケリングの聖地。ウミガメに会えるかも。水温25℃'},
-  {day:2,name:'流れ星の丘（星空ツアー）',lat:24.5521,lng:124.2903,time:'18:30',icon:'🌟',desc:'日本初の星空保護区。大人5,100円・子供2,800円・幼児無料'},
+  {day:2,name:'米原ビーチ（シュノーケリング）',lat:24.4530,lng:124.1856,time:'11:30',icon:'🐟',desc:'シュノーケリングの聖地。ウミガメに会えるかも'},
+  {day:2,name:'流れ星の丘（星空ツアー）',lat:24.5521,lng:124.2903,time:'18:30',icon:'🌟',desc:'日本初の星空保護区。幼児無料'},
   {day:3,name:'離島ターミナル',lat:24.3371,lng:124.1555,time:'08:30',icon:'🚢',desc:'ホテルから徒歩5分！乗り放題パス購入'},
   {day:3,name:'竹富島（水牛車・ビーチ）',lat:24.3269,lng:124.0892,time:'09:00',icon:'🐃',desc:'水牛車で赤瓦集落めぐり→コンドイビーチで海遊び'},
-  {day:3,name:'そば処 竹の子（ランチ）',lat:24.3313,lng:124.0836,time:'11:00',icon:'🍜',desc:'創業50年以上。竹富島産車海老そばは1日10食限定'},
-  {day:3,name:'結風・ゆいかじ（夕食）',lat:24.3399,lng:124.1565,time:'19:00',icon:'🎵',desc:'石垣島人気No.1ライブ居酒屋。19:20・21:00の2回ライブ'},
-  {day:4,name:'西表島 大原港（カヌー）',lat:24.2724,lng:123.8831,time:'09:30',icon:'🛶',desc:'世界自然遺産のジャングルでカヌー。3歳OKプランを選択'},
-  {day:4,name:'食堂 満八（ランチ）',lat:24.2711,lng:123.8810,time:'12:00',icon:'🍜',desc:'大原港周辺の地元食堂。中身そば・チャンプル定食が人気'},
-  {day:4,name:'由布島（水牛車で渡る）',lat:24.3425,lng:123.9325,time:'13:30',icon:'🐃',desc:'海の上を水牛が歩く感動体験。熱帯植物園・蝶々園も'},
-  {day:4,name:'ステーキレストラン パポイヤ（夕食）',lat:24.3396,lng:124.1569,time:'18:00',icon:'🥩',desc:'老舗石垣牛ステーキ。評価4.2。要予約（0980-83-3706）'},
-  {day:5,name:'いしなぎ屋（〆ランチ）',lat:24.3418,lng:124.1615,time:'12:00',icon:'🥩',desc:'精肉店直営の石垣牛。座敷・キッズチェアあり。要予約'},
-  {day:5,name:'石垣空港（帰路）',lat:24.3960,lng:124.2458,time:'19:20',icon:'✈️',desc:'19:20発→羽田22:00着。お疲れさまでした！'},
+  {day:3,name:'そば処 竹の子（ランチ）',lat:24.3313,lng:124.0836,time:'11:00',icon:'🍜',desc:'創業50年以上。車海老そばは1日10食限定'},
+  {day:3,name:'結風・ゆいかじ（夕食）',lat:24.3399,lng:124.1565,time:'19:00',icon:'🎵',desc:'石垣島人気No.1ライブ居酒屋'},
+  {day:4,name:'西表島 大原港（カヌー）',lat:24.2724,lng:123.8831,time:'09:30',icon:'🛶',desc:'世界自然遺産のジャングルでカヌー'},
+  {day:4,name:'食堂 満八（ランチ）',lat:24.2711,lng:123.8810,time:'12:00',icon:'🍜',desc:'大原港周辺の地元食堂。中身そば・チャンプルが人気'},
+  {day:4,name:'由布島（水牛車で渡る）',lat:24.3425,lng:123.9325,time:'13:30',icon:'🐃',desc:'海の上を水牛が歩く感動体験'},
+  {day:4,name:'ステーキレストラン パポイヤ（夕食）',lat:24.3396,lng:124.1569,time:'18:00',icon:'🥩',desc:'老舗石垣牛ステーキ。要予約 0980-83-3706'},
+  {day:5,name:'いしなぎ屋（〆ランチ）',lat:24.3418,lng:124.1615,time:'12:00',icon:'🥩',desc:'精肉店直営の石垣牛。要予約'},
+  {day:5,name:'石垣空港（帰路）',lat:24.3960,lng:124.2458,time:'19:20',icon:'✈️',desc:'19:20発→羽田22:00着'},
 ];
-let tripMap=null, mapLayers={}, mapInited=false;
-function makeMapIcon(day,emoji){
-  const c=MAP_COLORS[day];
-  return L.divIcon({className:'',html:`<div style="width:32px;height:32px;border-radius:50%;background:${c};border:2.5px solid #fff;box-shadow:0 2px 7px rgba(0,0,0,.22);display:flex;align-items:center;justify-content:center;font-size:14px">${emoji}</div>`,iconSize:[32,32],iconAnchor:[16,16],popupAnchor:[0,-18]});
+let tripMap=null,mapLayers={},mapInited=false;
+
+function openMapTab(btn){
+  // 既存のswと同じ処理を手動で行う
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sec-map').classList.add('active');
+  btn.classList.add('active');
+  // 地図を初期化・リサイズ
+  setTimeout(function(){
+    initTripMap();
+    if(tripMap)tripMap.invalidateSize();
+  },50);
 }
+
 function initTripMap(){
   if(mapInited)return;
   tripMap=L.map('trip-map',{center:[24.38,124.15],zoom:10});
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18}).addTo(tripMap);
-  MAP_SPOTS.forEach(s=>{
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(tripMap);
+  MAP_SPOTS.forEach(function(s){
     if(!mapLayers[s.day])mapLayers[s.day]=L.layerGroup().addTo(tripMap);
-    const m=L.marker([s.lat,s.lng],{icon:makeMapIcon(s.day,s.icon)});
-    m.bindPopup(`<div class="popup-strip" style="background:${MAP_COLORS[s.day]}"></div><div class="popup-inner"><div class="popup-day-label" style="color:${MAP_COLORS[s.day]}">${MAP_DAY_NAMES[s.day]}</div><div class="popup-name">${s.name}</div><div class="popup-time">🕐 ${s.time}</div><div class="popup-desc">${s.desc}</div></div>`,{maxWidth:240});
+    var icon=L.divIcon({className:'',html:'<div style="width:32px;height:32px;border-radius:50%;background:'+MAP_COLORS[s.day]+';border:2.5px solid #fff;box-shadow:0 2px 7px rgba(0,0,0,.22);display:flex;align-items:center;justify-content:center;font-size:14px">'+s.icon+'</div>',iconSize:[32,32],iconAnchor:[16,16],popupAnchor:[0,-18]});
+    var m=L.marker([s.lat,s.lng],{icon:icon});
+    m.bindPopup('<div class="popup-strip" style="background:'+MAP_COLORS[s.day]+'"></div><div class="popup-inner"><div class="popup-day-label" style="color:'+MAP_COLORS[s.day]+'">'+MAP_DAY_NAMES[s.day]+'</div><div class="popup-name">'+s.name+'</div><div class="popup-time">🕐 '+s.time+'</div><div class="popup-desc">'+s.desc+'</div></div>',{maxWidth:240});
     mapLayers[s.day].addLayer(m);
   });
   mapInited=true;
 }
+
 function toggleMapDay(day,btn){
   if(!mapInited)return;
   MAP_VISIBLE[day]=!MAP_VISIBLE[day];
   if(MAP_VISIBLE[day]){tripMap.addLayer(mapLayers[day]);btn.classList.remove('off');}
   else{tripMap.removeLayer(mapLayers[day]);btn.classList.add('off');}
 }
+
 function showAllMapDays(){
   if(!mapInited)return;
-  Object.keys(mapLayers).forEach(d=>{tripMap.addLayer(mapLayers[d]);MAP_VISIBLE[d]=true;});
-  document.querySelectorAll('.map-filter-btn[data-day]').forEach(b=>b.classList.remove('off'));
-}
-// sw関数を上書きして地図初期化を挟む
-const _swOrig=sw;
-function sw(name,btn){
-  _swOrig(name,btn);
-  if(name==='map'){setTimeout(()=>{initTripMap();tripMap&&tripMap.invalidateSize();},50);}
+  Object.keys(mapLayers).forEach(function(d){tripMap.addLayer(mapLayers[d]);MAP_VISIBLE[d]=true;});
+  document.querySelectorAll('.map-filter-btn[data-day]').forEach(function(b){b.classList.remove('off');});
 }
 </script>
 
