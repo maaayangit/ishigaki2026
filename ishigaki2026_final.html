@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:#f5f5f0;padding:12px;max-width:480px;margin:0 auto;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:#f5f5f0;padding:16px;max-width:680px;margin:0 auto;}
 .cover{border-radius:12px;overflow:hidden;margin-bottom:1.25rem;border:0.5px solid #d3d1c7;background:white;}
 .cover-top{position:relative;height:160px;overflow:hidden;}
 .cover-body{background:white;padding:1rem 1rem 0.875rem;}
@@ -74,6 +74,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 .member-row{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-top:0.5px solid #f0ede8;color:#1a1a1a;}
 .member-family{font-size:10px;color:#888780;}
 .eticket-note{background:#E6F1FB;border-radius:8px;padding:10px 12px;font-size:11px;color:#0C447C;margin-top:8px;display:flex;gap:8px;align-items:flex-start;}
+
+.msg{max-width:85%;padding:9px 13px;border-radius:16px;font-size:12px;line-height:1.6;}
+.msg.bot{background:#f5f5f0;color:#1a1a1a;align-self:flex-start;border-bottom-left-radius:4px;}
+.msg.user{background:#185FA5;color:white;align-self:flex-end;border-bottom-right-radius:4px;}
+.quick-q{padding:4px 11px;border-radius:14px;border:0.5px solid #b4b2a9;font-size:11px;color:#888780;cursor:pointer;background:white;}
+
+@media (min-width: 600px) {
+  body { padding: 24px; }
+  .cover-title { font-size: 26px; }
+  .cover-body { padding: 1.5rem; }
+  .tab { font-size: 13px; padding: 8px 20px; }
+  .tbc-hd, .day-hd { padding: 14px 18px; }
+  .day-body { padding: 0 18px 14px; }
+  .act-item { font-size: 13px; }
+  .act-note { font-size: 12px; }
+  .tbc-title, .day-title { font-size: 14px; }
+  .tbc-sub, .day-date { font-size: 12px; }
+  .faq-q-text { font-size: 13px; }
+  .faq-a { font-size: 13px; }
+  .info-val { font-size: 15px; }
+  .info-sub { font-size: 12px; }
+  .cd-num { font-size: 22px; }
+  .msg { font-size: 13px; }
+  #chat-messages { max-height: 420px; }
+}
 </style>
 </head>
 <body>
@@ -191,7 +216,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   <button class="tab active" onclick="sw('schedule',this)"><i class="ti ti-calendar"></i> 旅程</button>
   <button class="tab" onclick="sw('flight',this)"><i class="ti ti-plane"></i> フライト</button>
   <button class="tab" onclick="sw('hotel',this)"><i class="ti ti-building"></i> ホテル</button>
-  <button class="tab" onclick="sw('faq',this)"><i class="ti ti-help"></i> FAQ</button>
+  <button class="tab" onclick="sw('faq',this)"><i class="ti ti-message-circle"></i> 質問する</button>
   <button class="tab" onclick="sw('settlement',this)"><i class="ti ti-calculator"></i> 精算</button>
 </div>
 
@@ -430,12 +455,136 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 </div>
 
 <div id="sec-faq" class="sec">
-  <div style="border:0.5px dashed #b4b2a9;border-radius:12px;background:#f5f5f0;padding:24px 16px;text-align:center;">
-    <i class="ti ti-help" style="font-size:32px;color:#b4b2a9;display:block;margin-bottom:10px;"></i>
-    <div style="font-size:14px;font-weight:500;color:#888780;margin-bottom:6px;">FAQ 準備中</div>
-    <div style="font-size:12px;color:#888780;">チャット形式で質問できる機能を準備しています。<br>もうしばらくお待ちください！</div>
+  <div style="background:white;border:0.5px solid #d3d1c7;border-radius:12px;overflow:hidden;">
+    <div style="padding:10px 14px;border-bottom:0.5px solid #f0ede8;background:#f5f5f0;">
+      <div style="font-size:11px;font-weight:500;color:#1a1a1a;">旅程について質問してみよう 🌊</div>
+      <div style="font-size:10px;color:#888780;margin-top:2px;">旅程・フライト・ホテル・費用・持ち物など何でも</div>
+    </div>
+    <div id="chat-messages" style="padding:12px 14px;min-height:200px;max-height:360px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
+      <div class="msg bot">石垣島旅行について何でも聞いてください！✈️🌺</div>
+    </div>
+    <div style="padding:8px 14px;border-top:0.5px solid #f0ede8;display:flex;flex-wrap:wrap;gap:5px;">
+      <button class="quick-q" onclick="sendQ('集合は何時？')">集合は何時？</button>
+      <button class="quick-q" onclick="sendQ('ホテルはどこ？')">ホテルはどこ？</button>
+      <button class="quick-q" onclick="sendQ('持ち物は？')">持ち物は？</button>
+      <button class="quick-q" onclick="sendQ('費用はいくら？')">費用は？</button>
+      <button class="quick-q" onclick="sendQ('現金はいくら必要？')">現金は？</button>
+    </div>
+    <div style="display:flex;gap:8px;padding:10px 14px;border-top:0.5px solid #f0ede8;">
+      <input id="chat-input" type="text" placeholder="質問を入力してください" onkeydown="if(event.key==='Enter')sendChat()"
+        style="flex:1;font-size:13px;padding:8px 12px;border-radius:20px;border:0.5px solid #b4b2a9;background:#f5f5f0;color:#1a1a1a;outline:none;">
+      <button onclick="sendChat()" style="padding:8px 16px;border-radius:20px;background:#185FA5;color:white;border:none;font-size:13px;cursor:pointer;">送信</button>
+    </div>
   </div>
 </div>
+
+
+<script>
+const tripQA = [
+  // フライト
+  {keys:['集合','何時','羽田','出発'],
+   ans:'集合は羽田空港 第2ターミナルに10:00〜10:30ごろです。フライトは11:40発なので余裕を持って集まりましょう！'},
+  {keys:['便名','フライト番号','NH','ANA'],
+   ans:'行き：ANA NH091（羽田T2 11:40発 → 石垣 14:55着）\n帰り：ANA NH090（石垣 12:25発 → 羽田 15:00着）\n予約番号：DJQGXX'},
+  {keys:['予約番号','ANA','DJQGXX'],
+   ans:'ANA予約番号は DJQGXX です。ANAアプリや公式サイトで確認できます。'},
+  {keys:['Eチケット','搭乗券','チケット'],
+   ans:'EチケットはANAからのメールに添付されています。当日はメールアプリから提示するか、事前にスクリーンショットを保存しておいてください。オンラインチェックインは出発24時間前からANAアプリで可能です。'},
+  {keys:['着く','到着','石垣着','14:55'],
+   ans:'石垣には14:55着です。荷物を受け取ってレンタカーで移動し、ホテルへ向かいます。チェックインは16:00〜22:00です。'},
+  {keys:['帰り','帰る','復路','NH090'],
+   ans:'帰りは11/7（土）ANA NH090、石垣 12:25発 → 羽田 15:00着です。チェックアウトは11:00までなので、荷物をまとめてランチ・お土産を楽しんでから空港へ向かいましょう。'},
+  // ホテル
+  {keys:['ホテル','宿','どこ','泊まる'],
+   ans:'Sakura Cross Inn & Sauna Ishigaki（石垣島 美崎町11-1 3F）です。Family Suite Max 8 with Saunaで、サウナ付きの広いお部屋です！チェックイン16:00〜22:00、チェックアウト11:00まで。'},
+  {keys:['チェックイン','入れる'],
+   ans:'チェックインは16:00〜22:00です。11/3の到着が14:55なので、レンタカーで移動して16:00以降にチェックインできます。'},
+  {keys:['チェックアウト','出る'],
+   ans:'チェックアウトは11/7（土）11:00までです。空港には12:25発なので、チェックアウト後にランチやお土産を楽しむ時間があります。'},
+  {keys:['サウナ','風呂'],
+   ans:'ホテルにサウナがついています！Family Suite Max 8 Comfort 4 with Saunaというお部屋で、2家族でゆったり使えます。'},
+  {keys:['キャンセル'],
+   ans:'ホテルのキャンセル無料期限は2026年10月3日 23:59まで。10月4日以降はキャンセル料100%になるのでご注意を。'},
+  // 日程
+  {keys:['11/3','3日','初日'],
+   ans:'11/3（火）：羽田T2 11:40発 → 石垣 14:55着。ホテルチェックイン後、夜は唄もーれ（ライブ居酒屋）を予定しています。3,000円/人で食事・飲み物・ライブ込み・現金のみ。'},
+  {keys:['11/4','4日','北部'],
+   ans:'11/4（水）：北部一周デーの予定です。川平湾グラスボート → 米原ビーチシュノーケリング → 夜は流れ星の丘で星空ナイトツアー。予約準備中です。'},
+  {keys:['11/5','5日','竹富'],
+   ans:'11/5（木）：竹富島へ日帰り！石垣港からフェリーで約10分。水牛車観光、コンドイビーチ・カイジ浜（星砂探し）を楽しみます。予約準備中です。'},
+  {keys:['11/6','6日','西表'],
+   ans:'11/6（金）：西表島へ！仲間川マングローブカヌー → 由布島水牛渡しの予定。丸一日かかるフルデーです。予約準備中です。'},
+  {keys:['11/7','7日','最終日','帰宅'],
+   ans:'11/7（土）：帰宅日。チェックアウト（11:00まで）後、石垣市内でランチ・お土産。12:25発ANA NH090で羽田へ（15:00着）。'},
+  {keys:['唄もーれ','ライブ','居酒屋'],
+   ans:'唄もーれは石垣島の民謡ライブ居酒屋です。3,000円/人で食事・飲み物・ライブがすべて込み。現金のみなので事前に用意を！予約準備中です。'},
+  {keys:['川平湾','グラスボート'],
+   ans:'川平湾は石垣島屈指の絶景スポット。グラスボートでサンゴと熱帯魚を船底から観察できます。11/4に訪問予定です。'},
+  {keys:['竹富島','水牛','星砂'],
+   ans:'竹富島は石垣港からフェリー約10分。水牛車で集落を巡り、コンドイビーチ・カイジ浜で星砂探しが楽しめます。11/5に訪問予定。'},
+  {keys:['西表島','マングローブ','カヌー'],
+   ans:'西表島では仲間川でマングローブカヌー、由布島への水牛渡しを予定しています。11/6は丸一日西表島です。幼稚園児の参加可否確認中。'},
+  {keys:['流れ星','星空','星','ナイト'],
+   ans:'流れ星の丘は石垣島北端の星空スポット。11/4夜にナイトツアーを予定しています。予約準備中です。'},
+  // 費用
+  {keys:['費用','いくら','合計','総額'],
+   ans:'確定済み費用の合計は327,481円（フライト238,289円＋ホテル89,192円）。プラス、レンタカー・アクティビティ・食事・フェリー代などが別途かかります。'},
+  {keys:['精算','振込','Onishi','払う'],
+   ans:'Onishi Familyの精算額（確定分）は159,502円です。旅行後にKashiwagi Mayaへ振込をお願いします。レンタカー・アクティビティは予約確定後に追加されます。'},
+  {keys:['現金','キャッシュ'],
+   ans:'現金が必要な主な場面：唄もーれ（1人3,000円）、フェリー代、離島の小さな飲食店や売店。1〜2万円は現金で用意しておくと安心です。'},
+  {keys:['カード','クレジット'],
+   ans:'Sakura Cross Inn・大型スーパー（マックスバリュなど）・観光地の売店はカード対応。離島の小さな飲食店は現金のみが多いです。'},
+  // 持ち物・服装
+  {keys:['持ち物','準備','荷物','何持って'],
+   ans:'必須持ち物：水着・ラッシュガード・マリンシューズ・日焼け止め（SPF50推奨）・帽子・サンダル・着替え多め・コンパクトな雨具。カメラは防水ケースがあると安心です！'},
+  {keys:['服装','何着','気候','天気','気温'],
+   ans:'11月の石垣島は最高気温25〜27℃、朝晩は22℃前後。半袖＋1枚羽織れるものがちょうどよいです。急な雨もあるのでコンパクトな雨具も。'},
+  {keys:['日焼け','UV','紫外線'],
+   ans:'11月でも紫外線は強め！日焼け止め（SPF50推奨）・ラッシュガード・帽子は必須です。特にビーチやシュノーケリング時はこまめに塗り直しを。'},
+  {keys:['子ども','子供','キッズ'],
+   ans:'子ども向け持ち物：帽子・サンダル・着替え多め・ライフジャケット（現地レンタル可）。シュノーケルセットも子ども用サイズが借りられることが多いですが、持参すると安心。'},
+  {keys:['シュノーケル','スノーケル','泳ぐ','海'],
+   ans:'米原ビーチでシュノーケリングの予定です（11/4）。シュノーケル・ライフジャケットは現地レンタル可能な場合が多いですが、水着・ラッシュガード・マリンシューズは持参推奨。'},
+  {keys:['レンタカー','車'],
+   ans:'レンタカーは8人乗りワゴン×2台（チャイルドシート付き）を予約準備中です。'},
+];
+
+function getBotAnswer(q) {
+  const lq = q.replace(/[　 ]/g,'').toLowerCase();
+  for (const qa of tripQA) {
+    if (qa.keys.some(k => lq.includes(k.toLowerCase()))) {
+      return qa.ans.replace(/\n/g, '<br>');
+    }
+  }
+  return '申し訳ありません、その質問への答えは見つかりませんでした。詳しくはMayaに聞いてみてください 😊';
+}
+
+const chatMsgs = document.getElementById('chat-messages');
+
+function addMsg(text, who) {
+  const d = document.createElement('div');
+  d.className = 'msg ' + who;
+  d.innerHTML = text;
+  chatMsgs.appendChild(d);
+  chatMsgs.scrollTop = chatMsgs.scrollHeight;
+}
+
+function sendChat() {
+  const inp = document.getElementById('chat-input');
+  const q = inp.value.trim();
+  if (!q) return;
+  inp.value = '';
+  addMsg(q, 'user');
+  setTimeout(() => addMsg(getBotAnswer(q), 'bot'), 300);
+}
+
+function sendQ(q) {
+  sw('faq', document.querySelectorAll('.tab')[3]);
+  addMsg(q, 'user');
+  setTimeout(() => addMsg(getBotAnswer(q), 'bot'), 300);
+}
+</script>
 
 <script>
 function toggleDay(el){el.classList.toggle('open');}
