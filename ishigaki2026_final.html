@@ -27,6 +27,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 .tab{flex-shrink:0;padding:6px 14px;border-radius:20px;border:0.5px solid #b4b2a9;background:white;color:#888780;font-size:12px;cursor:pointer;white-space:nowrap;}
 .tab.active{background:#185FA5;color:white;border-color:#185FA5;}
 .sec{display:none;}.sec.active{display:block;}
+.day-card{border:0.5px solid #d3d1c7;border-radius:12px;background:white;margin-bottom:8px;overflow:hidden;}
+.day-hd{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;}
+.day-badge{width:38px;height:38px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;font-size:12px;}
+.day-info{flex:1;min-width:0;}
+.day-title{font-size:13px;font-weight:500;color:#1a1a1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.day-date{font-size:11px;color:#888780;}
+.chevron{color:#888780;font-size:14px;transition:transform 0.2s;flex-shrink:0;}
+.day-card.open .chevron{transform:rotate(180deg);}
+.day-body{display:none;padding:0 14px 11px;}
+.day-card.open .day-body{display:block;}
+.act-list{list-style:none;}
+.act-item{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-top:0.5px solid #f0ede8;font-size:12px;color:#1a1a1a;}
+.act-ic{font-size:15px;margin-top:1px;flex-shrink:0;}
+.act-note{font-size:11px;color:#888780;margin-top:1px;}
 .tbc-item{border:0.5px dashed #b4b2a9;border-radius:12px;background:#f5f5f0;margin-bottom:8px;}
 .tbc-hd{display:flex;align-items:center;gap:10px;padding:11px 14px;}
 .tbc-badge{width:38px;height:38px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;font-size:12px;background:white;border:0.5px solid #b4b2a9;color:#888780;}
@@ -50,9 +64,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 .info-card{border:0.5px solid #d3d1c7;border-radius:8px;padding:10px 12px;background:white;}
 .info-lbl{font-size:10px;color:#888780;margin-bottom:3px;}
 .info-val{font-size:13px;font-weight:500;color:#1a1a1a;}
-.info-sub{font-size:11px;color:#888780;}
+.info-sub{font-size:11px;color:#888780;margin-top:1px;}
 .tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;margin-top:5px;}
 .tag-info{background:#E6F1FB;color:#0C447C;}
+.tag-warn{background:#FAEEDA;color:#633806;}
+.tag-ok{background:#E1F5EE;color:#085041;}
+.confirmed-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;background:#E1F5EE;border:0.5px solid #5DCAA5;color:#085041;white-space:nowrap;flex-shrink:0;}
+.member-list{margin-top:8px;}
+.member-row{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-top:0.5px solid #f0ede8;color:#1a1a1a;}
+.member-family{font-size:10px;color:#888780;}
+.eticket-note{background:#E6F1FB;border-radius:8px;padding:10px 12px;font-size:11px;color:#0C447C;margin-top:8px;display:flex;gap:8px;align-items:flex-start;}
 </style>
 </head>
 <body>
@@ -93,10 +114,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
       <rect x="42" y="138" width="22" height="22" fill="#854F0B" stroke="#633806" stroke-width="0.7"/>
       <rect x="0" y="128" width="14" height="32" fill="#888780"/>
       <rect x="94" y="128" width="54" height="32" fill="#888780"/>
-      <rect x="94" y="132" width="26" height="7" fill="none" stroke="#5F5E5A" stroke-width="0.4"/>
-      <rect x="122" y="132" width="26" height="7" fill="none" stroke="#5F5E5A" stroke-width="0.4"/>
-      <rect x="94" y="142" width="30" height="7" fill="none" stroke="#5F5E5A" stroke-width="0.4"/>
-      <rect x="126" y="142" width="22" height="7" fill="none" stroke="#5F5E5A" stroke-width="0.4"/>
       <rect x="298" y="104" width="80" height="56" fill="#F1EFE8"/>
       <polygon points="290,106 384,106 376,88 298,88" fill="#D85A30"/>
       <line x1="310" y1="88" x2="304" y2="106" stroke="#993C1D" stroke-width="1" opacity="0.5"/>
@@ -109,10 +126,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
       <rect x="325" y="136" width="22" height="24" fill="#854F0B" stroke="#633806" stroke-width="0.7"/>
       <rect x="242" y="128" width="56" height="32" fill="#888780"/>
       <rect x="378" y="128" width="12" height="32" fill="#888780"/>
-      <rect x="242" y="132" width="28" height="7" fill="none" stroke="#5F5E5A" stroke-width="0.4"/>
-      <rect x="272" y="132" width="26" height="7" fill="none" stroke="#5F5E5A" stroke-width="0.4"/>
-      <rect x="242" y="142" width="22" height="7" fill="none" stroke="#5F5E5A" stroke-width="0.4"/>
-      <rect x="266" y="142" width="32" height="7" fill="none" stroke="#5F5E5A" stroke-width="0.4"/>
       <circle cx="100" cy="122" r="11" fill="#D4537E" opacity="0.9"/>
       <circle cx="111" cy="115" r="9" fill="#D4537E" opacity="0.85"/>
       <circle cx="105" cy="108" r="7" fill="#ED93B1" opacity="0.8"/>
@@ -163,7 +176,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
     <div class="cover-meta">
       <div class="cover-meta-item"><i class="ti ti-calendar" style="font-size:12px"></i> 11/3（火）〜 11/7（土）</div>
       <div class="cover-meta-item"><i class="ti ti-moon" style="font-size:12px"></i> 4泊5日</div>
-      <div class="cover-meta-item"><i class="ti ti-users" style="font-size:12px"></i> 2家族</div>
+      <div class="cover-meta-item"><i class="ti ti-users" style="font-size:12px"></i> 大人4名・子ども4名</div>
     </div>
     <div class="cd-row" id="cd">
       <div class="cd-item"><div class="cd-num" id="cd-d">--</div><div class="cd-lbl">日</div></div>
@@ -176,18 +189,145 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 
 <div class="tabs">
   <button class="tab active" onclick="sw('schedule',this)"><i class="ti ti-calendar"></i> 旅程</button>
-  <button class="tab" onclick="sw('faq',this)"><i class="ti ti-help"></i> FAQ</button>
   <button class="tab" onclick="sw('flight',this)"><i class="ti ti-plane"></i> フライト</button>
   <button class="tab" onclick="sw('hotel',this)"><i class="ti ti-building"></i> ホテル</button>
+  <button class="tab" onclick="sw('faq',this)"><i class="ti ti-help"></i> FAQ</button>
 </div>
 
 <div id="sec-schedule" class="sec active">
-  <div class="tbc-item"><div class="tbc-hd"><div class="tbc-badge"><div>11/3</div><div style="font-size:9px;">火</div></div><div class="tbc-info"><div class="tbc-title">到着・夜の予定</div><div class="tbc-sub">羽田発 → 石垣着 · ライブ居酒屋予定</div></div><span class="tbc-pill"><i class="ti ti-clock" style="font-size:10px"></i> 予約準備中</span></div></div>
-  <div class="tbc-item"><div class="tbc-hd"><div class="tbc-badge"><div>11/4</div><div style="font-size:9px;">水</div></div><div class="tbc-info"><div class="tbc-title">北部一周デー</div><div class="tbc-sub">川平湾 · 米原ビーチ · 流れ星の丘</div></div><span class="tbc-pill"><i class="ti ti-clock" style="font-size:10px"></i> 予約準備中</span></div></div>
-  <div class="tbc-item"><div class="tbc-hd"><div class="tbc-badge"><div>11/5</div><div style="font-size:9px;">木</div></div><div class="tbc-info"><div class="tbc-title">竹富島</div><div class="tbc-sub">水牛車 · コンドイビーチ · カイジ浜</div></div><span class="tbc-pill"><i class="ti ti-clock" style="font-size:10px"></i> 予約準備中</span></div></div>
-  <div class="tbc-item"><div class="tbc-hd"><div class="tbc-badge"><div>11/6</div><div style="font-size:9px;">金</div></div><div class="tbc-info"><div class="tbc-title">西表島</div><div class="tbc-sub">マングローブカヌー · 由布島水牛渡し</div></div><span class="tbc-pill"><i class="ti ti-clock" style="font-size:10px"></i> 予約準備中</span></div></div>
-  <div class="tbc-item"><div class="tbc-hd"><div class="tbc-badge"><div>11/7</div><div style="font-size:9px;">土</div></div><div class="tbc-info"><div class="tbc-title">帰宅日</div><div class="tbc-sub">チェックアウト · お土産 · 空港</div></div><span class="tbc-pill"><i class="ti ti-clock" style="font-size:10px"></i> 便確定待ち</span></div></div>
-  <div class="tbc-banner"><i class="ti ti-hourglass" style="font-size:18px;color:#888780;flex-shrink:0;"></i><div><div style="font-size:11px;font-weight:500;color:#888780;margin-bottom:2px;">To be continued...</div><div style="font-size:11px;color:#888780;">各アクティビティの予約が決まり次第、順次更新します。お楽しみに！</div></div></div>
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-hd">
+      <div class="day-badge" style="background:#E6F1FB;color:#0C447C;"><div>11/3</div><div style="font-size:9px;">火</div></div>
+      <div class="day-info"><div class="day-title">到着・夜の予定</div><div class="day-date">羽田 11:40発 → 石垣 14:55着</div></div>
+      <i class="ti ti-chevron-down chevron"></i>
+    </div>
+    <div class="day-body"><ul class="act-list">
+      <li class="act-item"><i class="ti ti-plane-departure act-ic" style="color:#185FA5"></i><div><div>ANA NH091 羽田T2 11:40発 → 石垣 14:55着</div><div class="act-note">予約番号：DJQGXX · エコノミーK</div></div></li>
+      <li class="act-item"><i class="ti ti-building act-ic" style="color:#0F6E56"></i><div><div>730HOTELS チェックイン（16:30〜）</div><div class="act-note">沖縄県石垣市大川1 · TEL: 079-263-7511</div></div></li>
+      <li class="act-item"><i class="ti ti-music act-ic" style="color:#BA7517"></i><div><div>唄もーれ（ライブ居酒屋）予定</div><div class="act-note">¥3,000/人・食事・飲み物・ライブ込み · 現金のみ · 予約準備中</div></div></li>
+    </ul></div>
+  </div>
+
+  <div class="tbc-item"><div class="tbc-hd">
+    <div class="tbc-badge"><div>11/4</div><div style="font-size:9px;">水</div></div>
+    <div class="tbc-info"><div class="tbc-title">北部一周デー</div><div class="tbc-sub">川平湾 · 米原ビーチ · 流れ星の丘</div></div>
+    <span class="tbc-pill"><i class="ti ti-clock" style="font-size:10px"></i> 予約準備中</span>
+  </div></div>
+
+  <div class="tbc-item"><div class="tbc-hd">
+    <div class="tbc-badge"><div>11/5</div><div style="font-size:9px;">木</div></div>
+    <div class="tbc-info"><div class="tbc-title">竹富島</div><div class="tbc-sub">水牛車 · コンドイビーチ · カイジ浜</div></div>
+    <span class="tbc-pill"><i class="ti ti-clock" style="font-size:10px"></i> 予約準備中</span>
+  </div></div>
+
+  <div class="tbc-item"><div class="tbc-hd">
+    <div class="tbc-badge"><div>11/6</div><div style="font-size:9px;">金</div></div>
+    <div class="tbc-info"><div class="tbc-title">西表島</div><div class="tbc-sub">マングローブカヌー · 由布島水牛渡し</div></div>
+    <span class="tbc-pill"><i class="ti ti-clock" style="font-size:10px"></i> 予約準備中</span>
+  </div></div>
+
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-hd">
+      <div class="day-badge" style="background:#FCEBEB;color:#791F1F;"><div>11/7</div><div style="font-size:9px;">土</div></div>
+      <div class="day-info"><div class="day-title">帰宅日</div><div class="day-date">石垣 12:25発 → 羽田 15:00着</div></div>
+      <i class="ti ti-chevron-down chevron"></i>
+    </div>
+    <div class="day-body"><ul class="act-list">
+      <li class="act-item"><i class="ti ti-building act-ic" style="color:#A32D2D"></i><div><div>730HOTELS チェックアウト</div></div></li>
+      <li class="act-item"><i class="ti ti-shopping-bag act-ic" style="color:#BA7517"></i><div><div>石垣市内でお土産・ランチ</div></div></li>
+      <li class="act-item"><i class="ti ti-plane-departure act-ic" style="color:#185FA5"></i><div><div>ANA NH090 石垣 12:25発 → 羽田 15:00着</div><div class="act-note">予約番号：DJQGXX · エコノミーK</div></div></li>
+    </ul></div>
+  </div>
+
+  <div class="tbc-banner"><i class="ti ti-hourglass" style="font-size:18px;color:#888780;flex-shrink:0;"></i><div><div style="font-size:11px;font-weight:500;color:#888780;margin-bottom:2px;">To be continued...</div><div style="font-size:11px;color:#888780;">レンタカー・各アクティビティの予約が決まり次第、順次更新します。お楽しみに！</div></div></div>
+</div>
+
+<div id="sec-flight" class="sec">
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-lbl"><i class="ti ti-plane-departure" style="font-size:11px;vertical-align:-1px"></i> 行き</div>
+      <div class="info-val">11/3（火）</div>
+      <div class="info-sub">羽田T2 11:40 → 石垣 14:55</div>
+      <div class="tag tag-ok">ANA NH091</div>
+    </div>
+    <div class="info-card">
+      <div class="info-lbl"><i class="ti ti-plane-arrival" style="font-size:11px;vertical-align:-1px"></i> 帰り</div>
+      <div class="info-val">11/7（土）</div>
+      <div class="info-sub">石垣 12:25 → 羽田 15:00</div>
+      <div class="tag tag-ok">ANA NH090</div>
+    </div>
+    <div class="info-card" style="grid-column:1/-1">
+      <div class="info-lbl">ANA予約番号</div>
+      <div class="info-val" style="font-size:18px;letter-spacing:0.1em;">DJQGXX</div>
+      <div class="info-sub">エコノミークラス K · 確定済み</div>
+    </div>
+    <div class="info-card" style="grid-column:1/-1">
+      <div class="info-lbl">搭乗者（8名）</div>
+      <div class="member-list">
+        <div class="member-row"><span>ONISHI HIROMASA MR</span><span class="member-family">Onishi Family</span></div>
+        <div class="member-row"><span>ONISHI KANNA MISS</span><span class="member-family">Onishi Family</span></div>
+        <div class="member-row"><span>ONISHI RINKA MISS</span><span class="member-family">Onishi Family</span></div>
+        <div class="member-row"><span>ONISHI KYONA MS</span><span class="member-family">Onishi Family</span></div>
+        <div class="member-row"><span>KASHIWAGI MAYA MR</span><span class="member-family">Kashiwagi Family</span></div>
+        <div class="member-row"><span>KASHIWAGI MIZUKI MS</span><span class="member-family">Kashiwagi Family</span></div>
+        <div class="member-row"><span>KASHIWAGI SENA MSTR</span><span class="member-family">Kashiwagi Family</span></div>
+        <div class="member-row"><span>KASHIWAGI RIZU MS</span><span class="member-family">Kashiwagi Family</span></div>
+      </div>
+    </div>
+    <div class="info-card" style="grid-column:1/-1">
+      <div class="info-lbl">Eチケットについて</div>
+      <div class="eticket-note" style="margin-top:0;">
+        <i class="ti ti-info-circle" style="font-size:14px;flex-shrink:0;margin-top:1px;"></i>
+        <div>Eチケット（搭乗者控え）はANAからのメールに添付されています。当日は各自メールアプリから提示、または事前にダウンロードして保存しておいてください。<br><br>ANA予約確認：<a href="https://aswbe.ana.co.jp/webapps/servicing/booking-search?CONNECTION_KIND=JPN&LANG=ja" style="color:#185FA5;">こちらから確認</a></div>
+      </div>
+    </div>
+    <div class="info-card" style="grid-column:1/-1">
+      <div class="info-lbl">チェックインについて</div>
+      <div class="info-sub" style="font-size:12px;color:#1a1a1a;line-height:1.6;">出発2時間前（9:40）を目安に羽田T2へ。ANAアプリまたはWebでオンラインチェックインも可能です（24時間前〜）。</div>
+    </div>
+  </div>
+</div>
+
+<div id="sec-hotel" class="sec">
+  <div class="info-grid">
+    <div class="info-card" style="grid-column:1/-1">
+      <div class="info-lbl">ホテル名</div>
+      <div class="info-val">730HOTELS〈石垣島〉</div>
+      <div class="info-sub">サウナ付きプライベートヴィラ · 160㎡ · 2LDK</div>
+      <div class="tag tag-ok">予約済み</div>
+    </div>
+    <div class="info-card">
+      <div class="info-lbl">チェックイン</div>
+      <div class="info-val">11/3（火）</div>
+      <div class="info-sub">16:30〜</div>
+    </div>
+    <div class="info-card">
+      <div class="info-lbl">チェックアウト</div>
+      <div class="info-val">11/7（土）</div>
+    </div>
+    <div class="info-card" style="grid-column:1/-1">
+      <div class="info-lbl">楽天トラベル予約番号</div>
+      <div class="info-val" style="font-size:16px;letter-spacing:0.05em;">RYa0mte63j</div>
+    </div>
+    <div class="info-card">
+      <div class="info-lbl">お支払い金額</div>
+      <div class="info-val">259,153円</div>
+      <div class="info-sub">クーポン15,747円引き後 · 決済済み</div>
+    </div>
+    <div class="info-card">
+      <div class="info-lbl">ホテル電話</div>
+      <div class="info-val" style="font-size:13px;">079-263-7511</div>
+    </div>
+    <div class="info-card" style="grid-column:1/-1">
+      <div class="info-lbl">住所</div>
+      <div class="info-sub" style="font-size:12px;color:#1a1a1a;">〒907-0022 沖縄県石垣市大川1 730COURT EAST COURT 3F</div>
+      <div class="tag tag-info"><i class="ti ti-anchor" style="font-size:10px;vertical-align:-1px"></i> フェリーターミナルから徒歩5分</div>
+    </div>
+    <div class="info-card" style="grid-column:1/-1">
+      <div class="info-lbl">部屋の特徴</div>
+      <div class="info-sub" style="font-size:12px;color:#1a1a1a;line-height:1.6;">最大10名宿泊可能なプライベートヴィラ。ダブルベッド5台、ロウリュサウナ、外気浴テラス完備。</div>
+    </div>
+  </div>
 </div>
 
 <div id="sec-faq" class="sec">
@@ -202,34 +342,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   <div id="faq-list"></div>
 </div>
 
-<div id="sec-flight" class="sec">
-  <div class="info-grid">
-    <div class="info-card"><div class="info-lbl"><i class="ti ti-plane-departure" style="font-size:11px;vertical-align:-1px"></i> 行き</div><div class="info-val">11/3（火）</div><div class="info-sub">羽田 11:40 → 新石垣 14:55</div></div>
-    <div class="info-card"><div class="info-lbl"><i class="ti ti-plane-arrival" style="font-size:11px;vertical-align:-1px"></i> 帰り</div><div class="info-val">11/7（土）</div><div class="info-sub">12:25 または 19:20（調整中）</div></div>
-    <div class="info-card" style="grid-column:1/-1"><div class="info-lbl">便名・予約番号</div><div class="info-val" style="font-size:12px;color:#888780;">メール共有後に追加予定</div><div class="tag tag-info"><i class="ti ti-info-circle" style="font-size:10px;vertical-align:-1px"></i> チェックインは出発2時間前を目安に</div></div>
-  </div>
-</div>
-
-<div id="sec-hotel" class="sec">
-  <div class="info-grid">
-    <div class="info-card" style="grid-column:1/-1"><div class="info-lbl">ホテル名</div><div class="info-val">730HOTELS</div><div class="info-sub">11/3チェックイン・11/7チェックアウト（4泊）</div></div>
-    <div class="info-card"><div class="info-lbl">合計費用</div><div class="info-val">274,900円</div><div class="info-sub">2家族合計・楽天トラベル経由</div></div>
-    <div class="info-card"><div class="info-lbl">アクセス</div><div class="info-val">徒歩5分</div><div class="info-sub">石垣港フェリーターミナルから</div></div>
-    <div class="info-card" style="grid-column:1/-1"><div class="info-lbl">予約番号</div><div class="info-val" style="font-size:12px;color:#888780;">メール共有後に追加予定</div></div>
-  </div>
-</div>
-
 <script>
+function toggleDay(el){el.classList.toggle('open');}
 const faqs=[
-  {cat:'flight',q:'羽田の集合は何時？',a:'フライトが11:40発なので、10:00〜10:30ごろ羽田空港集合予定です。ターミナル・詳細はフライト予約確定後に更新します。'},
-  {cat:'flight',q:'石垣に着いたらどうすればいい？',a:'14:55に新石垣空港着。荷物受け取り後、レンタカーで石垣市内へ移動します。730HOTELSはフェリーターミナルから徒歩5分です。'},
-  {cat:'hotel',q:'ホテルはどこにあるの？',a:'730HOTELSは石垣島の市街地にあります。石垣港フェリーターミナルから徒歩5分という立地で、竹富島・西表島へのフェリーに乗りやすいのが決め手です。'},
-  {cat:'hotel',q:'チェックインは何時？',a:'一般的なチェックインは15:00以降です。11/3の到着が14:55なので、荷物を預けてから夜の予定へ向かう流れになります。'},
-  {cat:'schedule',q:'唄もーれって何？',a:'石垣島の民謡ライブが楽しめる居酒屋です。3,000円/人で食事・飲み物・ライブがすべて込み。三線や民謡を聴きながら沖縄料理が楽しめます。現金のみなので準備を忘れずに！'},
+  {cat:'flight',q:'羽田の集合は何時？',a:'フライトが11:40発（羽田第2ターミナル）なので、9:40〜10:00ごろ集合が目安です。ANAアプリで事前オンラインチェックインもできます（24時間前から）。'},
+  {cat:'flight',q:'Eチケットはどうすればいい？',a:'ANAからのメールにEチケットが添付されています。当日はメールアプリから提示するか、事前にスクリーンショットや印刷をして保存しておいてください。ANA予約番号はDJQGXXです。'},
+  {cat:'flight',q:'石垣に着いたらどうすればいい？',a:'14:55に新石垣空港着。荷物受け取り後、レンタカーで石垣市内へ移動します。730HOTELSはフェリーターミナルから徒歩5分、チェックインは16:30からです。'},
+  {cat:'hotel',q:'ホテルはどんな部屋？',a:'160㎡のプライベートヴィラで最大10名宿泊可能。ダブルベッド5台、ロウリュサウナ、外気浴テラス付きです。2家族でゆったり使えます。'},
+  {cat:'hotel',q:'チェックインは何時？',a:'16:30からです。11/3の到着が14:55なので、空港からレンタカーで移動して荷物を置いたあと、夜の予定へ向かう流れになります。'},
+  {cat:'schedule',q:'唄もーれって何？',a:'石垣島の民謡ライブが楽しめる居酒屋です。3,000円/人で食事・飲み物・ライブがすべて込み。三線や民謡を聴きながら沖縄料理が楽しめます。現金のみ、予約準備中です。'},
   {cat:'schedule',q:'竹富島と西表島はなぜ別の日？',a:'西表島は移動・アクティビティ合わせると丸一日かかります。竹富島は石垣から10分とアクセスが良いので、余裕を持って楽しめるよう別日にしました。'},
   {cat:'schedule',q:'子どもはカヌーに乗れるの？',a:'西表島のマングローブカヌーは幼稚園児の参加可否をツアー会社に確認中です。確認でき次第こちらを更新します。'},
-  {cat:'money',q:'一人いくらかかる？',a:'ホテルは2家族で274,900円。プラス、フライト・アクティビティ・食事・移動費が別途かかります。概算は予約が揃い次第まとめて更新します。'},
-  {cat:'money',q:'ホテル代はどう分担するの？',a:'2家族合計274,900円です。分担方法は別途グループで相談しましょう。'},
+  {cat:'money',q:'旅行の費用はいくら？',a:'フライト238,289円＋ホテル259,153円（クーポン適用後）が主な確定費用です。プラス、レンタカー・アクティビティ・食事・現地移動費が別途かかります。'},
   {cat:'money',q:'現金が必要な場面は？',a:'唄もーれは現金のみ（1人3,000円）の予定です。石垣島はカードが使える店も増えていますが、フェリー代・小さな食堂・売店は現金推奨。1〜2万円は現金で用意しておくと安心です。'},
   {cat:'money',q:'クレジットカードはどこで使える？',a:'730HOTELS・大型スーパー（マックスバリュなど）・観光地の売店などは基本カード対応。ただし離島の小さな飲食店は現金のみが多いです。'},
   {cat:'gear',q:'11月の石垣って何を着ればいい？',a:'11月の石垣島は最高気温25〜27℃、朝晩は22℃前後とやや涼しい日も。半袖＋1枚羽織れるものがちょうどよいです。急な雨もあるのでコンパクトな雨具も便利。'},
