@@ -107,6 +107,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 .modal-inner img{width:100%;display:block;}
 .modal-close{display:block;text-align:center;padding:10px;font-size:13px;color:#888780;cursor:pointer;border-top:0.5px solid #f0ede8;}
 .price-btn{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;background:#FAEEDA;color:#633806;border:none;cursor:pointer;margin-top:4px;}
+
+#map-container { height: 420px; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+.day-filter { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+.filter-btn { padding: 4px 10px; border-radius: 14px; border: 0.5px solid #b4b2a9; font-size: 11px; cursor: pointer; background: white; color: #1a1a1a; }
+.filter-btn.off { opacity: 0.35; }
+.custom-popup .leaflet-popup-content-wrapper { border-radius: 10px; padding: 0; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+.custom-popup .leaflet-popup-content { margin: 0; }
+.popup-strip { height: 4px; }
+.popup-inner { padding: 10px 14px; }
+.popup-day { font-size: 10px; font-weight: 500; margin-bottom: 2px; }
+.popup-name { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
+.popup-time { font-size: 11px; color: #888780; margin-bottom: 3px; }
+.popup-desc { font-size: 11px; color: #5f5e5a; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -225,7 +238,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   <button class="tab" onclick="sw('flight',this)"><i class="ti ti-plane"></i> フライト</button>
   <button class="tab" onclick="sw('hotel',this)"><i class="ti ti-building"></i> ホテル</button>
   <button class="tab" onclick="sw('faq',this)"><i class="ti ti-message-circle"></i> 質問する</button>
-  <button class="tab" onclick="sw('links',this)"><i class="ti ti-link"></i> リンク</button>
+  <button class="tab" onclick="openMapTab(this)"><i class="ti ti-map"></i> 地図</button>
   <button class="tab" onclick="sw('settlement',this)"><i class="ti ti-calculator"></i> 精算</button>
 </div>
 
@@ -374,23 +387,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 </div>
 
 
-<div id="sec-links" class="sec">
-
-  <div style="border:0.5px solid #d3d1c7;border-radius:12px;background:white;margin-bottom:8px;overflow:hidden;">
-    <div style="padding:8px 14px;background:#f5f5f0;border-bottom:0.5px solid #f0ede8;font-size:10px;font-weight:500;color:#888780;">✈️ フライト・空港</div>
-    <div style="padding:8px 14px;display:flex;flex-direction:column;gap:10px;">
-      <a href="https://aswbe.ana.co.jp/webapps/servicing/booking-search?CONNECTION_KIND=JPN&LANG=ja" target="_blank" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#1a1a1a;">
-        <i class="ti ti-plane" style="font-size:18px;color:#185FA5;flex-shrink:0;"></i>
-        <div><div style="font-size:13px;font-weight:500;">ANA予約確認</div><div style="font-size:11px;color:#888780;">予約番号：DJQGXX</div></div>
-        <i class="ti ti-chevron-right" style="font-size:14px;color:#b4b2a9;margin-left:auto;"></i>
-      </a>
-      <a href="https://maps.google.com/?q=新石垣空港" target="_blank" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#1a1a1a;border-top:0.5px solid #f0ede8;padding-top:10px;">
-        <i class="ti ti-building-airport" style="font-size:18px;color:#185FA5;flex-shrink:0;"></i>
-        <div><div style="font-size:13px;font-weight:500;">新石垣空港</div><div style="font-size:11px;color:#888780;">Google Mapsで開く</div></div>
-        <i class="ti ti-chevron-right" style="font-size:14px;color:#b4b2a9;margin-left:auto;"></i>
-      </a>
-    </div>
+<div id="sec-map" class="sec">
+  <div class="day-filter">
+    <button class="filter-btn" onclick="showAllDays()" style="background:#1a1a1a;color:white;border-color:#1a1a1a;">全日程</button>
+    <button class="filter-btn" data-day="1" onclick="toggleDay('1',this)" style="background:#E6F1FB;border-color:#185FA5;color:#185FA5;">11/3</button>
+    <button class="filter-btn" data-day="2" onclick="toggleDay('2',this)" style="background:#E1F5EE;border-color:#0F6E56;color:#0F6E56;">11/4</button>
+    <button class="filter-btn" data-day="3" onclick="toggleDay('3',this)" style="background:#FAEEDA;border-color:#854F0B;color:#854F0B;">11/5</button>
+    <button class="filter-btn" data-day="4" onclick="toggleDay('4',this)" style="background:#E1F5EE;border-color:#085041;color:#085041;">11/6</button>
+    <button class="filter-btn" data-day="5" onclick="toggleDay('5',this)" style="background:#FCEBEB;border-color:#A32D2D;color:#A32D2D;">11/7</button>
   </div>
+  <div id="map-container"></div>
+  <div style="font-size:11px;color:#888780;text-align:center;margin-top:4px;">マーカーをタップすると詳細が表示されます</div>
+</div>
+
 
   <div style="border:0.5px solid #d3d1c7;border-radius:12px;background:white;margin-bottom:8px;overflow:hidden;">
     <div style="padding:8px 14px;background:#f5f5f0;border-bottom:0.5px solid #f0ede8;font-size:10px;font-weight:500;color:#888780;">🏨 ホテル</div>
@@ -770,5 +779,98 @@ updateCd();setInterval(updateCd,60000);renderFaqs('all');
     <span class="modal-close" onclick="document.getElementById('hoshizora-modal').classList.remove('open')">✕ 閉じる</span>
   </div>
 </div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+let mapInstance = null;
+let mapInitialized = false;
+let dayLayers = {};
+let dayVisible = {'1':true,'2':true,'3':true,'4':true,'5':true};
+
+const dayColors = {
+  '1':'#185FA5','2':'#0F6E56','3':'#854F0B','4':'#085041','5':'#A32D2D'
+};
+const dayNames = {
+  '1':'11/3（火）到着日','2':'11/4（水）北部一周','3':'11/5（木）竹富島','4':'11/6（金）西表島','5':'11/7（土）帰宅日'
+};
+
+const spots = [
+  {day:'1', name:'羽田空港 第2ターミナル', lat:35.5494, lng:139.7798, time:'11:40発', desc:'ANA NH091 → 石垣 14:55着'},
+  {day:'1', name:'新石垣空港', lat:24.3960, lng:124.2458, time:'14:55着', desc:'レンタカーでホテルへ'},
+  {day:'1', name:'Sakura Cross Inn & Sauna Ishigaki', lat:24.3401, lng:124.1543, time:'16:00〜', desc:'チェックイン。サウナ付きヴィラ'},
+  {day:'1', name:'唄もーれ', lat:24.3381, lng:124.1563, time:'18:30〜', desc:'¥5,000コース・飲み放題＋島料理10品・ライブ2回付き'},
+  {day:'2', name:'川平湾', lat:24.4522, lng:124.1450, time:'午前', desc:'グラスボートでサンゴ・熱帯魚を観察'},
+  {day:'2', name:'米原ビーチ', lat:24.4378, lng:124.2017, time:'昼頃', desc:'シュノーケリング。遠浅で子どもも安心'},
+  {day:'2', name:'流れ星の丘（久宇良公民館）', lat:24.5219, lng:124.2350, time:'集合20:15', desc:'星空ナイトツアー 20:30〜。スマホ等光る機器禁止・暖かい服装で'},
+  {day:'3', name:'石垣港 離島ターミナル', lat:24.3374, lng:124.1547, time:'午前', desc:'竹富島行きフェリー乗り場（約10分）'},
+  {day:'3', name:'竹富島 水牛車乗り場', lat:24.3250, lng:124.0960, time:'午前', desc:'水牛車で赤瓦・白砂の集落を観光'},
+  {day:'3', name:'コンドイビーチ', lat:24.3192, lng:124.0883, time:'午後', desc:'星砂探し・子どもに大人気'},
+  {day:'4', name:'石垣港 離島ターミナル', lat:24.3374, lng:124.1547, time:'午前', desc:'西表島行きフェリー乗り場（約40分）'},
+  {day:'4', name:'仲間川 マングローブカヌー', lat:24.2628, lng:123.9847, time:'午前〜昼', desc:'国内最大のマングローブ林を探検'},
+  {day:'4', name:'由布島', lat:24.2833, lng:123.9500, time:'午後', desc:'水牛車で浅瀬を渡る体験'},
+  {day:'5', name:'Sakura Cross Inn（チェックアウト）', lat:24.3401, lng:124.1543, time:'〜11:00', desc:'チェックアウト後、市内でお土産・ランチ'},
+  {day:'5', name:'新石垣空港', lat:24.3960, lng:124.2458, time:'12:25発', desc:'ANA NH090 → 羽田 15:00着'},
+];
+
+function makeIcon(day, color) {
+  return L.divIcon({
+    className: '',
+    html: `<div style="width:28px;height:28px;border-radius:50%;background:${dayColors[day]};border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:500;">${day}</div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    popupAnchor: [0, -16]
+  });
+}
+
+function initMap() {
+  if (mapInitialized) return;
+  mapInstance = L.map('map-container').setView([24.38, 124.15], 11);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap © CartoDB',
+    maxZoom: 18
+  }).addTo(mapInstance);
+
+  spots.forEach(s => {
+    if (!dayLayers[s.day]) dayLayers[s.day] = L.layerGroup().addTo(mapInstance);
+    const m = L.marker([s.lat, s.lng], { icon: makeIcon(s.day) });
+    m.bindPopup(`
+      <div>
+        <div class="popup-strip" style="background:${dayColors[s.day]}"></div>
+        <div class="popup-inner">
+          <div class="popup-day" style="color:${dayColors[s.day]}">${dayNames[s.day]}</div>
+          <div class="popup-name">${s.name}</div>
+          <div class="popup-time">🕐 ${s.time}</div>
+          <div class="popup-desc">${s.desc}</div>
+        </div>
+      </div>`, { className:'custom-popup', maxWidth:260 });
+    dayLayers[s.day].addLayer(m);
+  });
+
+  mapInitialized = true;
+}
+
+function openMapTab(btn) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-map').classList.add('active');
+  btn.classList.add('active');
+  setTimeout(initMap, 100);
+}
+
+function toggleDay(day, btn) {
+  if (!mapInitialized) return;
+  dayVisible[day] = !dayVisible[day];
+  if (dayVisible[day]) { mapInstance.addLayer(dayLayers[day]); btn.classList.remove('off'); }
+  else { mapInstance.removeLayer(dayLayers[day]); btn.classList.add('off'); }
+}
+
+function showAllDays() {
+  if (!mapInitialized) return;
+  Object.keys(dayLayers).forEach(d => { mapInstance.addLayer(dayLayers[d]); dayVisible[d] = true; });
+  document.querySelectorAll('.filter-btn[data-day]').forEach(b => b.classList.remove('off'));
+}
+</script>
+
 </body>
 </html>
