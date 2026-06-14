@@ -242,11 +242,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
     </ul></div>
   </div>
 
-  <div class="tbc-item"><div class="tbc-hd">
-    <div class="tbc-badge"><div>11/4</div><div style="font-size:9px;">水</div></div>
-    <div class="tbc-info"><div class="tbc-title">北部一周デー</div><div class="tbc-sub">川平湾 · 米原ビーチ · 流れ星の丘</div></div>
-    <span class="tbc-pill"><i class="ti ti-clock" style="font-size:10px"></i> 予約準備中</span>
-  </div></div>
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-hd">
+      <div class="day-badge" style="background:#E1F5EE;color:#085041;"><div>11/4</div><div style="font-size:9px;">水</div></div>
+      <div class="day-info"><div class="day-title">北部一周デー</div><div class="day-date">川平湾 · 米原ビーチ · 流れ星の丘</div></div>
+      <i class="ti ti-chevron-down chevron"></i>
+    </div>
+    <div class="day-body"><ul class="act-list">
+      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>川平湾 グラスボート</div><div class="act-note">サンゴと熱帯魚を船底から観察</div></div></li>
+      <li class="act-item"><i class="ti ti-ripple act-ic" style="color:#1D9E75"></i><div><div>米原ビーチ シュノーケリング</div><div class="act-note">子どもも楽しめる遠浅ビーチ</div></div></li>
+      <li class="act-item"><i class="ti ti-star act-ic" style="color:#BA7517"></i><div><div>流れ星の丘 星空ナイトツアー 20:30〜</div><div class="act-note">集合20:15 · 久宇良公民館 · TEL: 080-6480-2445 · 暖かい服装で · スマホ等の光る機器使用禁止 · 料金28,300円は現地後払い</div></div></li>
+    </ul></div>
+  </div>
 
   <div class="tbc-item"><div class="tbc-hd">
     <div class="tbc-badge"><div>11/5</div><div style="font-size:9px;">木</div></div>
@@ -455,7 +462,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
     <div style="font-size:10px;color:#888780;margin-bottom:8px;">今後追加予定の費用（予約確定後に更新）</div>
     <div style="font-size:12px;color:#888780;display:flex;flex-direction:column;gap:6px;">
       <div style="display:flex;justify-content:space-between;"><span>レンタカー（×2台）</span><span>予約準備中</span></div>
-      <div style="display:flex;justify-content:space-between;"><span>星空ナイトツアー</span><span>予約準備中</span></div>
+      <div style="display:flex;justify-content:space-between;"><span>流れ星の丘 星空ツアー</span><span>28,300円（現地後払い）</span></div>
       <div style="display:flex;justify-content:space-between;"><span>マングローブカヌー</span><span>予約準備中</span></div>
       <div style="display:flex;justify-content:space-between;"><span>唄もーれ（現地払い・各家族）</span><span>各¥16,000</span></div>
     </div>
@@ -517,7 +524,7 @@ const tripQA = [
   {keys:['11/3','3日','初日'],
    ans:'11/3（火）：羽田T2 11:40発 → 石垣 14:55着。ホテルチェックイン後、18:30〜唄もーれへ！飲み放題＋コース料理・ライブ2回付き。現金のみ。'},
   {keys:['11/4','4日','北部'],
-   ans:'11/4（水）：北部一周デーの予定です。川平湾グラスボート → 米原ビーチシュノーケリング → 夜は流れ星の丘で星空ナイトツアー。予約準備中です。'},
+   ans:'11/4（水）：北部一周デー！川平湾グラスボート → 米原ビーチシュノーケリング → 夜20:30〜流れ星の丘で星空ナイトツアー（集合20:15 久宇良公民館）。ツアー中はスマホなどの光る機器の使用禁止。暖かい服装で！'},
   {keys:['11/5','5日','竹富'],
    ans:'11/5（木）：竹富島へ日帰り！石垣港からフェリーで約10分。水牛車観光、コンドイビーチ・カイジ浜（星砂探し）を楽しみます。予約準備中です。'},
   {keys:['11/6','6日','西表'],
@@ -533,7 +540,7 @@ const tripQA = [
   {keys:['西表島','マングローブ','カヌー'],
    ans:'西表島では仲間川でマングローブカヌー、由布島への水牛渡しを予定しています。11/6は丸一日西表島です。幼稚園児の参加可否確認中。'},
   {keys:['流れ星','星空','星','ナイト'],
-   ans:'流れ星の丘は石垣島北端の星空スポット。11/4夜にナイトツアーを予定しています。予約準備中です。'},
+   ans:'流れ星の丘の星空ナイトツアーは11/4（水）20:30〜（集合20:15 久宇良公民館）。予約番号：9QXBM108。料金：大人5,100円×4、子供2,800円×3、幼児無料。合計28,300円（現地後払い）。ツアー中はスマホ等の光る機器使用禁止、暖かい服装で！'},
   // 費用
   {keys:['費用','いくら','合計','総額'],
    ans:'確定済み費用の合計は327,481円（フライト238,289円＋ホテル89,192円）。プラス、レンタカー・アクティビティ・食事・フェリー代などが別途かかります。'},
