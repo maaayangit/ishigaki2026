@@ -390,11 +390,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 <div id="sec-map" class="sec">
   <div class="day-filter">
     <button class="filter-btn" onclick="showAllDays()" style="background:#1a1a1a;color:white;border-color:#1a1a1a;">全日程</button>
-    <button class="filter-btn" data-day="1" onclick="toggleDay('1',this)" style="background:#E6F1FB;border-color:#185FA5;color:#185FA5;">11/3</button>
-    <button class="filter-btn" data-day="2" onclick="toggleDay('2',this)" style="background:#E1F5EE;border-color:#0F6E56;color:#0F6E56;">11/4</button>
-    <button class="filter-btn" data-day="3" onclick="toggleDay('3',this)" style="background:#FAEEDA;border-color:#854F0B;color:#854F0B;">11/5</button>
-    <button class="filter-btn" data-day="4" onclick="toggleDay('4',this)" style="background:#E1F5EE;border-color:#085041;color:#085041;">11/6</button>
-    <button class="filter-btn" data-day="5" onclick="toggleDay('5',this)" style="background:#FCEBEB;border-color:#A32D2D;color:#A32D2D;">11/7</button>
+    <button class="filter-btn" data-day="1" onclick="toggleMapDay('1',this)" style="background:#E6F1FB;border-color:#185FA5;color:#185FA5;">11/3</button>
+    <button class="filter-btn" data-day="2" onclick="toggleMapDay('2',this)" style="background:#E1F5EE;border-color:#0F6E56;color:#0F6E56;">11/4</button>
+    <button class="filter-btn" data-day="3" onclick="toggleMapDay('3',this)" style="background:#FAEEDA;border-color:#854F0B;color:#854F0B;">11/5</button>
+    <button class="filter-btn" data-day="4" onclick="toggleMapDay('4',this)" style="background:#E1F5EE;border-color:#085041;color:#085041;">11/6</button>
+    <button class="filter-btn" data-day="5" onclick="toggleMapDay('5',this)" style="background:#FCEBEB;border-color:#A32D2D;color:#A32D2D;">11/7</button>
   </div>
   <div id="map-container"></div>
   <div style="font-size:11px;color:#888780;text-align:center;margin-top:4px;">マーカーをタップすると詳細が表示されます</div>
@@ -781,7 +781,7 @@ function openMapTab(btn) {
   setTimeout(initMap, 100);
 }
 
-function toggleDay(day, btn) {
+function toggleMapDay(day, btn) {
   if (!mapInitialized) return;
   dayVisible[day] = !dayVisible[day];
   if (dayVisible[day]) { mapInstance.addLayer(dayLayers[day]); btn.classList.remove('off'); }
