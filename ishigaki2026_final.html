@@ -261,12 +261,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-hd">
       <div class="day-badge" style="background:#E1F5EE;color:#085041;"><div>11/4</div><div style="font-size:9px;">水</div></div>
-      <div class="day-info"><div class="day-title">北部一周デー</div><div class="day-date">川平湾 · 米原ビーチ · 流れ星の丘</div></div>
+      <div class="day-info"><div class="day-title">北部一周デー</div><div class="day-date">カビラマルシェ · 玉取崎 · 平久保崎 · サンセットビーチ · 星空ツアー</div></div>
       <i class="ti ti-chevron-down chevron"></i>
     </div>
     <div class="day-body"><ul class="act-list">
-      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>川平湾 グラスボート</div><div class="act-note">サンゴと熱帯魚を船底から観察</div></div></li>
-      <li class="act-item"><i class="ti ti-ripple act-ic" style="color:#1D9E75"></i><div><div>米原ビーチ シュノーケリング</div><div class="act-note">子どもも楽しめる遠浅ビーチ</div></div></li>
+      <li class="act-item"><i class="ti ti-tools-kitchen-2 act-ic" style="color:#0F6E56"></i><div><div>カビラマルシェ 13:00〜</div><div class="act-note">川平湾エリアでランチ＋テイクアウト購入</div></div></li>
+      <li class="act-item"><i class="ti ti-mountain act-ic" style="color:#185FA5"></i><div><div>玉取崎展望台 14:00〜</div><div class="act-note">石垣島北部の絶景スポット</div></div></li>
+      <li class="act-item"><i class="ti ti-lighthouse act-ic" style="color:#185FA5"></i><div><div>平久保崎灯台 15:30〜</div><div class="act-note">石垣島最北端の灯台で散策</div></div></li>
+      <li class="act-item"><i class="ti ti-sunset-2 act-ic" style="color:#BA7517"></i><div><div>サンセットビーチ 17:00〜</div><div class="act-note">テイクアウトで食事しながら夕日鑑賞🌅</div></div></li>
+      <li class="act-item"><i class="ti ti-car act-ic" style="color:#888780"></i><div><div>流れ星の丘へ移動 18:00〜</div><div class="act-note">サンセットビーチから車で数分</div></div></li>
       <li class="act-item"><i class="ti ti-star act-ic" style="color:#BA7517"></i><div><div>流れ星の丘 星空ナイトツアー 20:30〜</div><div class="act-note">集合20:15 · 久宇良公民館 · TEL: 080-6480-2445 · 暖かい服装で · スマホ等の光る機器使用禁止 · 料金合計43,100円（現地後払い）</div></div></li>
     </ul></div>
   </div>
@@ -588,7 +591,7 @@ const tripQA = [
   {keys:['11/3','3日','初日'],
    ans:'11/3（火）：羽田T2 11:40発 → 石垣 15:00着。ホテルチェックイン後、18:30〜唄もーれへ！飲み放題＋コース料理・ライブ2回付き。現金のみ。'},
   {keys:['11/4','4日','北部'],
-   ans:'11/4（水）：北部一周デー！川平湾グラスボート → 米原ビーチシュノーケリング → 夜20:30〜流れ星の丘で星空ナイトツアー（集合20:15 久宇良公民館）。ツアー中はスマホなどの光る機器の使用禁止。暖かい服装で！'},
+   ans:'11/4（水）：北部一周デー！13:00カビラマルシェでランチ → 14:00玉取崎展望台 → 15:30平久保崎灯台 → 17:00サンセットビーチで夕日🌅 → 20:30流れ星の丘で星空ナイトツアー（集合20:15 久宇良公民館）。スマホ等光る機器禁止・暖かい服装で！'},
   {keys:['11/5','5日','竹富'],
    ans:'11/5（木）：竹富島へ日帰り！石垣港からフェリーで約10分。水牛車観光、コンドイビーチ・カイジ浜（星砂探し）を楽しみます。予約準備中です。'},
   {keys:['11/6','6日','西表'],
@@ -751,8 +754,10 @@ const spots = [
   {day:'1', name:'南国レンタカー 石垣島店', lat:24.3686, lng:124.1858, time:'15:00受取', desc:'セレナ8人乗り×1台。新石垣空港から無料送迎14分', url:'https://maps.google.com/?q=南国レンタカー石垣島店'},
   {day:'1', name:'Sakura Cross Inn & Sauna Ishigaki', lat:24.3401, lng:124.1543, time:'16:00〜', desc:'チェックイン。サウナ付きヴィラ', url:'https://www.sakura-cross.com/ishigaki.html'},
   {day:'1', name:'唄もーれ', lat:24.3381, lng:124.1563, time:'18:30〜', desc:'¥5,000コース・飲み放題＋島料理10品・ライブ2回付き', url:'https://tabelog.com/okinawa/A4705/A470501/47017912/'},
-  {day:'2', name:'川平湾', lat:24.4522, lng:124.1450, time:'午前', desc:'グラスボートでサンゴ・熱帯魚を観察', url:'https://gurukun-kabira.com/'},
-  {day:'2', name:'米原ビーチ', lat:24.4378, lng:124.2017, time:'昼頃', desc:'シュノーケリング。遠浅で子どもも安心', url:'https://maps.google.com/?q=米原ビーチ+石垣島'},
+  {day:'2', name:'カビラマルシェ', lat:24.4500, lng:124.1450, time:'13:00〜', desc:'川平湾エリアでランチ＋テイクアウト購入', url:'https://maps.google.com/?q=カビラマルシェ+石垣島'},
+  {day:'2', name:'玉取崎展望台', lat:24.4733, lng:124.2092, time:'14:00〜', desc:'石垣島北部の絶景スポット', url:'https://maps.google.com/?q=玉取崎展望台+石垣島'},
+  {day:'2', name:'平久保崎灯台', lat:24.5833, lng:124.2833, time:'15:30〜', desc:'石垣島最北端の灯台で散策', url:'https://maps.google.com/?q=平久保崎灯台+石垣島'},
+  {day:'2', name:'サンセットビーチ', lat:24.5167, lng:124.2167, time:'17:00〜', desc:'テイクアウトで食事しながら夕日鑑賞🌅', url:'https://maps.google.com/?q=サンセットビーチ+石垣島'},
   {day:'2', name:'流れ星の丘（久宇良公民館）', lat:24.5219, lng:124.2350, time:'集合20:15', desc:'星空ナイトツアー 20:30〜。スマホ等光る機器禁止・暖かい服装で', url:'https://goattours.com/'},
   {day:'3', name:'石垣港 離島ターミナル', lat:24.3374, lng:124.1547, time:'午前', desc:'竹富島・西表島行きフェリー乗り場', url:'https://maps.google.com/?q=石垣港離島ターミナル'},
   {day:'3', name:'竹富島 水牛車乗り場', lat:24.3250, lng:124.0960, time:'午前', desc:'水牛車で赤瓦・白砂の集落を観光', url:'https://www.taketomijima.jp/'},
