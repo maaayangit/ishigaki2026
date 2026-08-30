@@ -279,13 +279,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-hd">
       <div class="day-badge" style="background:#FAEEDA;color:#633806;"><div>11/5</div><div style="font-size:9px;">木</div></div>
-      <div class="day-info"><div class="day-title">竹富島</div><div class="day-date">水牛車 · コンドイビーチ · カイジ浜</div></div>
+      <div class="day-info"><div class="day-title">竹富島 · 結風</div><div class="day-date">水牛車 · コンドイビーチ · カイジ浜 · ライブ居酒屋</div></div>
       <i class="ti ti-chevron-down chevron"></i>
     </div>
     <div class="day-body"><ul class="act-list">
-      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>石垣港 離島ターミナル 午前</div><div class="act-note">竹富島行きフェリー（約10分）</div></div></li>
-      <li class="act-item"><i class="ti ti-horse act-ic" style="color:#854F0B"></i><div><div>水牛車観光</div><div class="act-note">赤瓦・白砂の集落をのんびり観光</div></div></li>
-      <li class="act-item"><i class="ti ti-ripple act-ic" style="color:#1D9E75"></i><div><div>コンドイビーチ · カイジ浜</div><div class="act-note">星砂探し · 子どもに大人気</div></div></li>
+      <li class="act-item"><i class="ti ti-coffee act-ic" style="color:#854F0B"></i><div><div>朝食 8:20 ホテル出発</div><div class="act-note">前夜コンビニ調達のおにぎり・パンで済ませる</div></div></li>
+      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>石垣港 離島ターミナル 8:30発</div><div class="act-note">八重山観光フェリーで竹富島へ（約15分）· 13名全員同じ便で乗船</div></div></li>
+      <li class="act-item"><i class="ti ti-horse act-ic" style="color:#854F0B"></i><div><div>水牛車観光 9:00〜</div><div class="act-note">三線BGMで赤瓦集落を約25分巡回 · 0歳・3歳も乗車可 · Onishi＆Kashiwagi Family（9名）とSato Family（4名）で2グループに分乗</div></div></li>
+      <li class="act-item"><i class="ti ti-bike act-ic" style="color:#0F6E56"></i><div><div>自転車レンタル 9:30〜</div><div class="act-note">大人用・子供用を確保（最終返却16:00）</div></div></li>
+      <li class="act-item"><i class="ti ti-ripple act-ic" style="color:#1D9E75"></i><div><div>コンドイビーチ 9:45〜</div><div class="act-note">遠浅の白砂ビーチで子供たちが海遊び🏖️（自転車で約10分）</div></div></li>
+      <li class="act-item"><i class="ti ti-bowl-chopsticks act-ic" style="color:#BA7517"></i><div><div>そば処 竹の子 11:00〜</div><div class="act-note">創業50年以上・評価4.4 · 車海老そば1日10食限定 · 11:00開店に合わせて入店 · 13名は2回転の可能性あり</div></div></li>
+      <li class="act-item"><i class="ti ti-star act-ic" style="color:#BA7517"></i><div><div>カイジ浜（星砂の浜）12:00〜</div><div class="act-note">星の形の砂を探す体験 · お土産の星砂もここで</div></div></li>
+      <li class="act-item"><i class="ti ti-shopping-bag act-ic" style="color:#888780"></i><div><div>島内散策・お土産 12:30〜</div><div class="act-note">ミンサー織り・島ぞうりなどを物色 · 自転車返却13:00（竹富観光センターへ、港乗り捨て不可）</div></div></li>
+      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>竹富港発 14:00〜</div><div class="act-note">定期便で石垣島へ（約15分）· 港へはシャトルバスor徒歩15〜20分or巡回バス300円（前日要電話予約：0980-85-2154）</div></div></li>
+      <li class="act-item"><i class="ti ti-home act-ic" style="color:#0F6E56"></i><div><div>ホテル帰着・休憩 15:00〜</div><div class="act-note">夕食に備えてひと息</div></div></li>
+      <li class="act-item"><i class="ti ti-music act-ic" style="color:#BA7517"></i><div><div>結風（ゆいかじ）19:00〜</div><div class="act-note">石垣島人気No.1ライブ居酒屋 · 19:20ライブスタート🎶 · 予約準備中</div></div></li>
     </ul></div>
   </div>
 
@@ -799,9 +807,9 @@ function makeIcon(day, color) {
 function initMap() {
   if (mapInitialized) return;
   mapInstance = L.map('map-container').setView([24.38, 124.15], 11);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap © CartoDB',
-    maxZoom: 18
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
   }).addTo(mapInstance);
 
   spots.forEach(s => {
