@@ -120,6 +120,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 .popup-name { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
 .popup-time { font-size: 11px; color: #888780; margin-bottom: 3px; }
 .popup-desc { font-size: 11px; color: #5f5e5a; line-height: 1.5; }
+.chk-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding:0 2px;}
+.chk-title{font-size:13px;font-weight:600;color:#1a1a1a;}
+.chk-sub{font-size:10px;color:#888780;margin-top:2px;}
+.chk-reset{font-size:11px;color:#888780;background:white;border:0.5px solid #b4b2a9;border-radius:14px;padding:4px 12px;cursor:pointer;}
+.chk-group{background:white;border:0.5px solid #d3d1c7;border-radius:12px;margin-bottom:10px;overflow:hidden;}
+.chk-gtitle{font-size:11px;font-weight:600;color:#0C447C;background:#E6F1FB;padding:8px 14px;}
+.chk-item{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border-top:0.5px solid #f0ede8;cursor:pointer;}
+.chk-item:first-of-type{border-top:none;}
+.chk-item input{width:18px;height:18px;margin-top:1px;flex-shrink:0;accent-color:#185FA5;}
+.chk-text{font-size:12px;color:#1a1a1a;line-height:1.6;}
+.chk-note{display:block;font-size:10px;color:#888780;}
+.chk-item input:checked + .chk-text{color:#b4b2a9;text-decoration:line-through;}
 </style>
 </head>
 <body>
@@ -241,6 +253,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
   <button class="tab" onclick="sw('faq',this)"><i class="ti ti-message-circle"></i> 質問する</button>
   <button class="tab" onclick="openMapTab(this)"><i class="ti ti-map"></i> 地図</button>
   <button class="tab" onclick="sw('settlement',this)"><i class="ti ti-calculator"></i> 精算</button>
+  <button class="tab" onclick="sw('check',this)"><i class="ti ti-checklist"></i> チェック</button>
 </div>
 
 <div id="sec-schedule" class="sec active">
@@ -286,7 +299,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
     <div class="day-body"><ul class="act-list">
       <li class="act-item"><i class="ti ti-coffee act-ic" style="color:#854F0B"></i><div><div>朝食 8:00頃 ホテル出発</div><div class="act-note">前夜コンビニ調達のおにぎり・パンで済ませる</div></div></li>
       <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>石垣港 離島ターミナル 8:30発</div><div class="act-note">八重山観光フェリーで竹富島へ（約15分）· 団体①（Onishi・Kashiwagi）予約番号：L1VVI3MQ · 団体②（Sato）予約番号：NUAGK3CV</div></div></li>
-      <li class="act-item"><i class="ti ti-horse act-ic" style="color:#854F0B"></i><div><div>水牛車観光 9:00〜</div><div class="act-note">三線BGMで赤瓦集落を約25分巡回 · 0歳・3歳も乗車可 · Onishi＆Kashiwagi Family（9名）とSato Family（5名）で2グループに分乗</div></div></li>
+      <li class="act-item"><i class="ti ti-horse act-ic" style="color:#854F0B"></i><div><div>水牛車観光 9:00〜</div><div class="act-note">三線BGMで赤瓦集落を約25分巡回 · 0歳・3歳も乗車可 · Onishi＆Kashiwagi Family（8名）とSato Family（5名）で2グループに分乗</div></div></li>
       <li class="act-item"><i class="ti ti-bike act-ic" style="color:#0F6E56"></i><div><div>自転車レンタル 9:30〜</div><div class="act-note">大人用・子供用を確保（最終返却16:00）</div></div></li>
       <li class="act-item"><i class="ti ti-ripple act-ic" style="color:#1D9E75"></i><div><div>コンドイビーチ 9:45〜</div><div class="act-note">遠浅の白砂ビーチで子供たちが海遊び🏖️（自転車で約10分）</div></div></li>
       <li class="act-item"><i class="ti ti-soup act-ic" style="color:#BA7517"></i><div><div>そば処 竹の子 11:00〜</div><div class="act-note">創業50年以上・評価4.4 · 車海老そば1日10食限定 · 11:00開店に合わせて入店 · 13名は2回転の可能性あり</div></div></li>
@@ -318,10 +331,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
       <i class="ti ti-chevron-down chevron"></i>
     </div>
     <div class="day-body"><ul class="act-list">
-      <li class="act-item"><i class="ti ti-building act-ic" style="color:#A32D2D"></i><div><div>Sakura Cross Inn チェックアウト（11:00まで）</div></div></li>
-      <li class="act-item"><i class="ti ti-shopping-bag act-ic" style="color:#BA7517"></i><div><div>石垣市内でお土産・ランチ（レンタカーで移動）</div><div class="act-note">レンタカー返却12:00までに南国レンタカーへ戻る必要あり、時間に注意</div></div></li>
-      <li class="act-item"><i class="ti ti-car act-ic" style="color:#A32D2D"></i><div><div>レンタカー返却：南国レンタカー 12:00（厳守）</div><div class="act-note">石垣市字平得283 · TEL: 070-9483-3770 · 新石垣空港まで無料送迎14分</div></div></li>
-      <li class="act-item"><i class="ti ti-plane-departure act-ic" style="color:#185FA5"></i><div><div>ANA NH090 石垣 12:20発 → 羽田 14:55着 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">予約番号：DJQGXX · エコノミーK · 返却後の送迎で空港へ</div></div></li>
+      <li class="act-item"><i class="ti ti-building act-ic" style="color:#A32D2D"></i><div><div>9:00 Sakura Cross Inn チェックアウト・荷物積み込み</div><div class="act-note">チェックアウト期限は11:00ですが、フライトに合わせて早めに出発</div></div></li>
+      <li class="act-item"><i class="ti ti-shopping-bag act-ic" style="color:#BA7517"></i><div><div>9:15〜10:00 市内でお土産（ユーグレナモール周辺）</div><div class="act-note">買い残しは空港でも買えます · 満タン返しの場合はこの後給油</div></div></li>
+      <li class="act-item"><i class="ti ti-car act-ic" style="color:#A32D2D"></i><div><div>10:30 レンタカー返却：南国レンタカー</div><div class="act-note">予約上の返却期限は12:00ですが、12:20発に乗るため10:30返却が目安 · 石垣市字平得283 · TEL: 070-9483-3770 · 空港まで無料送迎14分</div></div></li>
+      <li class="act-item"><i class="ti ti-tools-kitchen-2 act-ic" style="color:#BA7517"></i><div><div>11:00頃 新石垣空港着 → 荷物を預けて空港でランチ</div><div class="act-note">ANAの手荷物預け締切は出発20分前（12:00）· 保安検査は早めに</div></div></li>
+      <li class="act-item"><i class="ti ti-plane-departure act-ic" style="color:#185FA5"></i><div><div>ANA NH090 石垣 12:20発 → 羽田 14:55着 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">予約番号：DJQGXX · エコノミーK · Sato FamilyはJAL972（10:40発）なので10:00までに空港へ</div></div></li>
     </ul></div>
   </div>
 </div>
@@ -626,7 +640,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
           <td style="text-align:right;padding:8px 14px;color:#1a1a1a;">16,000円</td>
         </tr>
         <tr style="border-top:0.5px solid #f0ede8;">
-          <td style="padding:8px 14px;color:#1a1a1a;">流れ星の丘 星空ツアー（11/4）<br><span style="color:#888780;font-size:10px;">現地後払い · 予約番号：9QXBM108</span></td>
+          <td style="padding:8px 14px;color:#1a1a1a;">流れ星の丘 星空ツアー（11/4）<br><span style="color:#888780;font-size:10px;">現地後払い · 予約番号：9QXBM108<br>当日は家族ごとに支払い（記念撮影1,500円は3家族で500円ずつ）</span></td>
           <td style="text-align:right;padding:8px 14px;color:#1a1a1a;">15,300円</td>
           <td style="text-align:right;padding:8px 14px;color:#1a1a1a;">12,500円</td>
           <td style="text-align:right;padding:8px 14px;color:#1a1a1a;">15,300円</td>
@@ -750,14 +764,55 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 
 </div>
 
+<div id="sec-check" class="sec">
+  <div class="chk-head"><div><div class="chk-title">最終チェックリスト</div><div class="chk-sub">チェックはこの端末にだけ保存されます</div></div><button class="chk-reset" onclick="resetChecks()">リセット</button></div>
+  <div class="chk-group"><div class="chk-gtitle">出発前（〜11/2）</div>
+    <label class="chk-item"><input type="checkbox" data-k="flight-ci" onchange="saveCheck(this)"><span class="chk-text">ANAオンラインチェックイン（11/2 11:40から可能）<span class="chk-note">Sato FamilyはJAL972も別途</span></span></label>
+    <label class="chk-item"><input type="checkbox" data-k="eticket" onchange="saveCheck(this)"><span class="chk-text">Eチケット・予約番号をスマホに保存<span class="chk-note">ANA DJQGXX · ホテル 5144197865 · 星空 9QXBM108</span></span></label>
+    <label class="chk-item"><input type="checkbox" data-k="weather" onchange="saveCheck(this)"><span class="chk-text">天気・台風情報を確認<span class="chk-note">シュノーケルの無料キャンセルは11/2 09:00まで</span></span></label>
+    <label class="chk-item"><input type="checkbox" data-k="cash" onchange="saveCheck(this)"><span class="chk-text">現金を用意（家族あたり約8万円＋α）<span class="chk-note">唄もーれは現金のみ · 星空・グラスボート・のんぷらも現地払い</span></span></label>
+    <label class="chk-item"><input type="checkbox" data-k="license" onchange="saveCheck(this)"><span class="chk-text">運転免許証（レンタカーを運転する人）</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="bus" onchange="saveCheck(this)"><span class="chk-text">竹富島の巡回バスを使うなら11/4中に電話予約<span class="chk-note">0980-85-2154</span></span></label>
+  </div>
+  <div class="chk-group"><div class="chk-gtitle">みんなの持ち物</div>
+    <label class="chk-item"><input type="checkbox" data-k="id" onchange="saveCheck(this)"><span class="chk-text">保険証・身分証</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="battery" onchange="saveCheck(this)"><span class="chk-text">モバイルバッテリー・充電器</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="medicine" onchange="saveCheck(this)"><span class="chk-text">常備薬・酔い止め<span class="chk-note">フェリー・ボートに乗る日が3日あります</span></span></label>
+    <label class="chk-item"><input type="checkbox" data-k="rain" onchange="saveCheck(this)"><span class="chk-text">折りたたみ傘 or 雨具</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="jacket" onchange="saveCheck(this)"><span class="chk-text">羽織るもの（星空ツアーの夜用）</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="sun" onchange="saveCheck(this)"><span class="chk-text">日焼け止め・帽子・サングラス</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="bug" onchange="saveCheck(this)"><span class="chk-text">虫よけ<span class="chk-note">西表島・夜の星空ツアーで</span></span></label>
+  </div>
+  <div class="chk-group"><div class="chk-gtitle">海・アクティビティ</div>
+    <label class="chk-item"><input type="checkbox" data-k="swim" onchange="saveCheck(this)"><span class="chk-text">水着（シュノーケル集合時は着用済みで）・ラッシュガード</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="shoes" onchange="saveCheck(this)"><span class="chk-text">マリンシューズ・ビーチサンダル<span class="chk-note">のんぷらはフェルト底靴の無料レンタルあり</span></span></label>
+    <label class="chk-item"><input type="checkbox" data-k="drybag" onchange="saveCheck(this)"><span class="chk-text">防水バッグ（のんぷらは必須）</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="phonecase" onchange="saveCheck(this)"><span class="chk-text">スマホ防水ケース</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="sd" onchange="saveCheck(this)"><span class="chk-text">MicroSDカード（GoPro貸出用）</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="towel" onchange="saveCheck(this)"><span class="chk-text">タオル・着替え・濡れ物用の袋</span></label>
+  </div>
+  <div class="chk-group"><div class="chk-gtitle">小さい子ども用</div>
+    <label class="chk-item"><input type="checkbox" data-k="diaper" onchange="saveCheck(this)"><span class="chk-text">おむつ（水遊び用も）・おしりふき</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="milk" onchange="saveCheck(this)"><span class="chk-text">ミルク・離乳食・おやつ</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="carrier" onchange="saveCheck(this)"><span class="chk-text">抱っこ紐<span class="chk-note">カヌー・水牛車・フェリーの移動で</span></span></label>
+    <label class="chk-item"><input type="checkbox" data-k="kidsclothes" onchange="saveCheck(this)"><span class="chk-text">着替え多め・子ども用の帽子</span></label>
+  </div>
+  <div class="chk-group"><div class="chk-gtitle">当日の朝に確認</div>
+    <label class="chk-item"><input type="checkbox" data-k="d1" onchange="saveCheck(this)"><span class="chk-text">11/3 羽田T2に9:40〜10:00集合 · 夜の唄もーれは現金16,000円/家族</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="d2" onchange="saveCheck(this)"><span class="chk-text">11/4 8:00出発 · 水着着用・飲み物1人1本 · 夜用の羽織り<span class="chk-note">星空ツアーは光る機器禁止</span></span></label>
+    <label class="chk-item"><input type="checkbox" data-k="d3" onchange="saveCheck(this)"><span class="chk-text">11/5 8:30フェリー · 自転車返却13:00 · 竹富港14:00発</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="d4" onchange="saveCheck(this)"><span class="chk-text">11/6 7:30出発 · 防水バッグ・着替え · のんぷら代を持参<span class="chk-note">帰りは上原港17:05発</span></span></label>
+    <label class="chk-item"><input type="checkbox" data-k="d5" onchange="saveCheck(this)"><span class="chk-text">11/7 9:00出発 · レンタカー10:30返却 · 忘れ物チェック<span class="chk-note">Sato FamilyはJAL 10:40発</span></span></label>
+  </div>
+</div>
 <div id="sec-faq" class="sec">
   <div style="background:white;border:0.5px solid #d3d1c7;border-radius:12px;overflow:hidden;">
     <div style="padding:10px 14px;border-bottom:0.5px solid #f0ede8;background:#f5f5f0;">
       <div style="font-size:11px;font-weight:500;color:#1a1a1a;">AIに質問してみよう 🌊</div>
-      <div style="font-size:10px;color:#888780;margin-top:2px;">旅程・持ち物・現地情報など何でも · Web検索で最新情報もお届け</div>
+      <div style="font-size:10px;color:#888780;margin-top:2px;">旅程・持ち物・お金のことなど何でも</div>
     </div>
     <div id="chat-messages" style="padding:12px 14px;min-height:200px;max-height:400px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
-      <div class="msg bot">石垣島旅行について何でも聞いてください！旅程のことはもちろん、現地の気候・服装・観光情報なども調べてお答えします ✈️🌺</div>
+      <div class="msg bot">石垣島旅行について何でも聞いてください！旅程のことはもちろん、服装・持ち物・お金のことなどにもお答えします ✈️🌺</div>
     </div>
     <div style="padding:8px 14px;border-top:0.5px solid #f0ede8;display:flex;flex-wrap:wrap;gap:5px;">
       <button class="quick-q" onclick="sendQ('集合は何時？')">集合は何時？</button>
@@ -779,7 +834,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 const tripQA = [
   // === フライト ===
   {keys:['集合','羽田','何時に集合','出発何時'],
-   ans:'羽田空港 第2ターミナルに10:00〜10:30ごろ集合が目安です。フライトは11:40発です。'},
+   ans:'羽田空港 第2ターミナルに9:40〜10:00ごろ集合が目安です。フライトは11:40発です。'},
   {keys:['便名','フライト番号','NH091','ANA便'],
    ans:'行き：ANA NH091（羽田T2 11:40発 → 石垣 15:00着）\n帰り：ANA NH090（石垣 12:20発 → 羽田 14:55着）\n予約番号：DJQGXX'},
   {keys:['予約番号','DJQGXX'],
@@ -803,7 +858,7 @@ const tripQA = [
   {keys:['チェックイン時間','入れる','何時から'],
    ans:'チェックインは16:00〜22:00です。11/3の到着が15:00なのでレンタカーで移動後、16:00以降にチェックインできます。'},
   {keys:['チェックアウト','退室','何時まで'],
-   ans:'チェックアウトは11/7（土）11:00までです。レンタカー返却が12:00なので、チェックアウト後にお土産・ランチを楽しんでから返却という流れになります。'},
+   ans:'チェックアウト期限は11/7（土）11:00ですが、12:20発のフライトに合わせて9:00ごろ出発します。お土産を買ってレンタカーを10:30に返却、ランチは空港で。'},
   {keys:['ホテル予約番号','Booking','5144197865'],
    ans:'Booking.com予約番号は 5144197865 です。'},
   {keys:['サウナ','温泉','風呂'],
@@ -821,7 +876,7 @@ const tripQA = [
   {keys:['レンタカー受取','受け取り','15:00'],
    ans:'11/3 15:00に南国レンタカー石垣島店で受取です。新石垣空港から無料送迎があります（約14分）。TEL: 070-9483-3770'},
   {keys:['レンタカー返却','返す','12:00'],
-   ans:'11/7 12:00に南国レンタカーへ返却です。返却後の空港への無料送迎（14分）を利用して12:20発のフライトに乗ります。時間に余裕がないのでお土産・ランチは早めに済ませましょう。'},
+   ans:'予約上の返却期限は11/7 12:00ですが、12:20発に間に合わせるため10:30返却が目安です。返却後は無料送迎（約14分）で空港へ。'},
   {keys:['チャイルドシート','ジュニアシート','子供シート'],
    ans:'ジュニアシート（3歳〜11歳）×1がオプションで付いています。'},
 
@@ -835,7 +890,7 @@ const tripQA = [
   {keys:['11/6','6日','4日目','西表'],
    ans:'11/6（金）：7:30ホテル出発→8:00石垣港発フェリーで西表島上原港へ→のんぷら「ピナイサーラの滝＆水牛観光」（予約確定・各自現地払い）→上原港17:05発で石垣港へ'},
   {keys:['11/7','7日','最終日','帰宅日'],
-   ans:'11/7（土）：チェックアウト11:00→市内お土産・ランチ→レンタカー返却12:00→送迎で空港→ANA NH090 12:20発。Sato FamilyはJAL972 10:40発で先に出発します。'},
+   ans:'11/7（土）：9:00チェックアウト→市内でお土産→10:30レンタカー返却→送迎で空港（11:00頃）→空港でランチ→ANA NH090 12:20発。Sato FamilyはJAL972 10:40発で先に出発します。'},
 
   // === 唄もーれ ===
   {keys:['唄もーれ','ライブ居酒屋','民謡'],
@@ -857,7 +912,7 @@ const tripQA = [
   {keys:['フェリー','八重山','離島ターミナル'],
    ans:'石垣港 離島ターミナルから八重山観光フェリーで竹富島へ（約15分）。11/5は8:30発です。竹富島→西表島などもここから乗船します。'},
   {keys:['水牛車','すいぎゅう'],
-   ans:'竹富島では9:00〜水牛車観光。三線BGMで赤瓦の集落を約25分巡回します。Onishi&Kashiwagi Family（9名）とSato Family（4名）で2グループに分乗。0歳・3歳も乗車OKです。'},
+   ans:'竹富島では9:00〜水牛車観光。三線BGMで赤瓦の集落を約25分巡回します。Onishi&Kashiwagi Family（8名）とSato Family（5名）で2グループに分乗。0歳・3歳も乗車OKです。'},
   {keys:['自転車','レンタサイクル'],
    ans:'竹富島では9:30〜自転車レンタル（最終返却16:00）。大人用・子供用を確保します。コンドイビーチまで約10分です。'},
   {keys:['コンドイ','ビーチ','海遊び'],
@@ -895,7 +950,7 @@ const tripQA = [
   {keys:['精算','振込','Onishi精算'],
    ans:'Mayaへの振込額（旅行後）：Onishi Family 252,372円、Sato Family 79,320円。家族別・項目別の内訳は「精算」タブで確認できます。'},
   {keys:['現金','いくら現金','キャッシュ'],
-   ans:'現金が必要な場面：唄もーれ（各家族16,000円・現金のみ）・星空ツアー（現地後払い）・離島の飲食店など。グラスボート・のんぷらも現地払いです。'},
+   ans:'現地払いは家族あたり約8万円：唄もーれ16,000円（現金のみ）・グラスボート・星空ツアー・のんぷら。カード可否が未確認のものもあるので現金で用意しておくと安心です。'},
   {keys:['カード','クレジット','キャッシュレス'],
    ans:'Sakura Cross Inn・大型スーパー（マックスバリュなど）・観光地の売店はカード対応。ただし離島の小さな飲食店・フェリー乗り場は現金のみが多いです。'},
 
@@ -978,9 +1033,9 @@ const faqs=[
   {cat:'hotel',q:'チェックインは何時？',a:'16:00〜22:00です。11/3の到着が15:00なので、空港からレンタカーで移動して荷物を置いたあと、夜の予定へ向かう流れになります。'},
   {cat:'schedule',q:'唄もーれって何？',a:'唄もーれは石垣島の民謡ライブ居酒屋。11/3（火）18:30〜。¥5,000コース（飲み放題＋島料理10品・ライブ2回付き）。各家族¥16,000、現地払い・現金のみ。'},
   {cat:'schedule',q:'竹富島と西表島はなぜ別の日？',a:'西表島は移動・アクティビティ合わせると丸一日かかります。竹富島は石垣から10分とアクセスが良いので、余裕を持って楽しめるよう別日にしました。'},
-  {cat:'schedule',q:'子どもはカヌーに乗れるの？',a:'西表島のマングローブカヌーは幼稚園児の参加可否をツアー会社に確認中です。確認でき次第こちらを更新します。'},
-  {cat:'money',q:'旅行の費用はいくら？',a:'フライト238,289円＋ホテル89,192円が主な確定費用です。合計327,481円。プラス、レンタカー・アクティビティ・食事・現地移動費が別途かかります。'},
-  {cat:'money',q:'現金が必要な場面は？',a:'唄もーれは各家族¥16,000（現地払い・現金のみ）。フェリー代・離島の食堂・売店も現金推奨。2〜3万円は現金で用意しておくと安心です。'},
+  {cat:'schedule',q:'子どもはカヌーに乗れるの？',a:'のんぷらのツアーはカヌーも水牛渡しも13名全員参加OK（確認済み）。Sato Familyは親子3人乗りのカヌーです。滝までのトレッキングは5歳以上が対象です。'},
+  {cat:'money',q:'旅行の費用はいくら？',a:'家族別の内訳は「精算」タブにあります。Mayaへの振込（旅行後）：Onishi 252,372円・Sato 79,320円。現地払い：Onishi 84,200円・Kashiwagi 79,100円・Sato 84,700円。食事（唄もーれ以外）・お土産は別です。'},
+  {cat:'money',q:'現金が必要な場面は？',a:'現地払いは家族あたり約8万円（唄もーれ16,000円は現金のみ・グラスボート・星空ツアー・のんぷら）。カードが使えるか未確認のものもあるので、この分＋離島の食堂・売店用に現金を用意しておくと安心です。'},
   {cat:'money',q:'クレジットカードはどこで使える？',a:'Sakura Cross Inn・大型スーパー（マックスバリュなど）・観光地の売店などは基本カード対応。ただし離島の小さな飲食店は現金のみが多いです。'},
   {cat:'gear',q:'11月の石垣って何を着ればいい？',a:'11月の石垣島は最高気温25〜27℃、朝晩は22℃前後とやや涼しい日も。半袖＋1枚羽織れるものがちょうどよいです。急な雨もあるのでコンパクトな雨具も便利。'},
   {cat:'gear',q:'マリンアクティビティに必要な持ち物は？',a:'シュノーケル・ライフジャケットはレンタル可能な場合が多いですが、水着・ラッシュガード・マリンシューズは持参推奨。カメラはぜひ防水ケースを。'},
@@ -1054,20 +1109,20 @@ const spots = [
   {day:'1', name:'南国レンタカー 石垣島店', lat:24.3686, lng:124.1858, time:'15:00受取', desc:'セレナ8人乗り×1台。新石垣空港から無料送迎14分', url:'https://maps.google.com/?q=南国レンタカー石垣島店'},
   {day:'1', name:'Sakura Cross Inn & Sauna Ishigaki', lat:24.3401, lng:124.1543, time:'16:00〜', desc:'チェックイン。サウナ付きヴィラ', url:'https://www.sakura-cross.com/ishigaki.html'},
   {day:'1', name:'唄もーれ', lat:24.3381, lng:124.1563, time:'18:30〜', desc:'¥5,000コース・飲み放題＋島料理10品・ライブ2回付き', url:'https://tabelog.com/okinawa/A4705/A470501/47017912/'},
-  {day:'2', name:'川平湾', lat:24.4522, lng:124.1450, time:'9:00〜', desc:'グラスボートでサンゴ・熱帯魚を観察（所要約40分）', url:'https://gurukun-kabira.com/'},
-  {day:'2', name:'米原ビーチ', lat:24.4378, lng:124.2017, time:'10:30〜', desc:'シュノーケリング。遠浅で子どもも安心（所要約2時間）', url:'https://maps.google.com/?q=米原ビーチ+石垣島'},
-  {day:'2', name:'カビラマルシェ', lat:24.4500, lng:124.1450, time:'13:00〜', desc:'川平湾エリアでランチ＋テイクアウト購入', url:'https://maps.google.com/?q=カビラマルシェ+石垣島'},
-  {day:'2', name:'玉取崎展望台', lat:24.4733, lng:124.2092, time:'14:00〜', desc:'石垣島北部の絶景スポット', url:'https://maps.google.com/?q=玉取崎展望台+石垣島'},
-  {day:'2', name:'平久保崎灯台', lat:24.5833, lng:124.2833, time:'15:30〜', desc:'石垣島最北端の灯台で散策', url:'https://maps.google.com/?q=平久保崎灯台+石垣島'},
-  {day:'2', name:'サンセットビーチ', lat:24.5167, lng:124.2167, time:'17:00〜', desc:'テイクアウトで食事しながら夕日鑑賞🌅', url:'https://maps.google.com/?q=サンセットビーチ+石垣島'},
+  {day:'2', name:'川平湾', lat:24.4522, lng:124.1450, time:'9:00〜', desc:'グラスボート（海邦マリン・集合8:50）でサンゴと熱帯魚を観察（約30分）', url:'https://maps.google.com/?q=川平湾+石垣島'},
+  {day:'2', name:'カビラマルシェ', lat:24.4500, lng:124.1450, time:'9:30〜11:15', desc:'川平湾エリアでランチ。11:15にベッセルホテルへ出発', url:'https://maps.google.com/?q=カビラマルシェ+石垣島'},
+  {day:'2', name:'ベッセルホテル石垣島（シュノーケル集合）', lat:24.3362, lng:124.1505, time:'集合12:15', desc:'幻の島＆ウミガメorマンタ シュノーケリング 12:15〜15:45。水着着用・飲み物1人1本', url:'https://maps.google.com/?q=ベッセルホテル石垣島'},
+  {day:'2', name:'平久保崎灯台', lat:24.6083, lng:124.3156, time:'〜17:00', desc:'石垣島最北端の絶景スポット（売店なし・自販機あり）', url:'https://maps.google.com/?q=平久保崎灯台+石垣島'},
+  {day:'2', name:'サンセットビーチ', lat:24.5167, lng:124.2167, time:'〜18:00', desc:'夕日鑑賞🌅', url:'https://maps.google.com/?q=サンセットビーチ+石垣島'},
   {day:'2', name:'流れ星の丘（久宇良公民館）', lat:24.5219, lng:124.2350, time:'集合20:15', desc:'星空ナイトツアー 20:30〜。スマホ等光る機器禁止・暖かい服装で', url:'https://goattours.com/'},
   {day:'3', name:'石垣港 離島ターミナル', lat:24.3374, lng:124.1547, time:'午前', desc:'竹富島・西表島行きフェリー乗り場', url:'https://maps.google.com/?q=石垣港離島ターミナル'},
   {day:'3', name:'竹富島 水牛車乗り場', lat:24.3250, lng:124.0960, time:'午前', desc:'水牛車で赤瓦・白砂の集落を観光', url:'https://www.taketomijima.jp/'},
   {day:'3', name:'コンドイビーチ', lat:24.3192, lng:124.0883, time:'午後', desc:'星砂探し・子どもに大人気', url:'https://maps.google.com/?q=コンドイビーチ+竹富島'},
-  {day:'4', name:'仲間川 マングローブカヌー', lat:24.2628, lng:123.9847, time:'午前〜昼', desc:'国内最大のマングローブ林を探検', url:'https://maps.google.com/?q=仲間川+西表島'},
-  {day:'4', name:'由布島', lat:24.2833, lng:123.9500, time:'午後', desc:'水牛車で浅瀬を渡る体験', url:'https://yubujima.com/'},
-  {day:'5', name:'Sakura Cross Inn（チェックアウト）', lat:24.3401, lng:124.1543, time:'〜11:00', desc:'チェックアウト後、市内でお土産・ランチ', url:'https://www.sakura-cross.com/ishigaki.html'},
-  {day:'5', name:'新石垣空港', lat:24.3960, lng:124.2458, time:'12:20発', desc:'ANA NH090 → 羽田 14:55着', url:'https://www.ishigaki-airport.co.jp/'},
+  {day:'4', name:'西表島 上原港', lat:24.4180, lng:123.7930, time:'8:40着 / 17:05発', desc:'八重山観光フェリーで発着', url:'https://maps.google.com/?q=上原港+西表島'},
+  {day:'4', name:'ピナイサーラの滝', lat:24.3640, lng:123.8170, time:'午前〜昼', desc:'のんぷらツアー：マングローブカヌー＋滝（トレッキングは5歳以上）', url:'https://maps.google.com/?q=ピナイサーラの滝'},
+  {day:'4', name:'由布島', lat:24.3450, lng:123.9340, time:'午後', desc:'水牛車で浅瀬を渡る（13名全員）', url:'https://yubujima.com/'},
+  {day:'5', name:'Sakura Cross Inn（チェックアウト）', lat:24.3401, lng:124.1543, time:'9:00', desc:'チェックアウト→お土産→10:30レンタカー返却', url:'https://www.sakura-cross.com/ishigaki.html'},
+  {day:'5', name:'新石垣空港', lat:24.3960, lng:124.2458, time:'12:20発', desc:'11:00頃着・ランチは空港で · ANA NH090 → 羽田 14:55着', url:'https://www.ishigaki-airport.co.jp/'},
 ];
 
 function makeIcon(day, color) {
@@ -1189,5 +1244,11 @@ function showAllDays() {
     <span class="modal-close" onclick="document.getElementById('nonpura-modal').classList.remove('open')">✕ 閉じる</span>
   </div>
 </div>
+<script>
+function saveCheck(el){try{const d=JSON.parse(localStorage.getItem('ishigakiChecks')||'{}');d[el.dataset.k]=el.checked;localStorage.setItem('ishigakiChecks',JSON.stringify(d));}catch(e){}}
+function loadChecks(){let d={};try{d=JSON.parse(localStorage.getItem('ishigakiChecks')||'{}');}catch(e){}document.querySelectorAll('#sec-check input[data-k]').forEach(el=>{el.checked=!!d[el.dataset.k];});}
+function resetChecks(){if(!confirm('チェックをすべて外しますか？'))return;try{localStorage.removeItem('ishigakiChecks');}catch(e){}loadChecks();}
+loadChecks();
+</script>
 </body>
 </html>
