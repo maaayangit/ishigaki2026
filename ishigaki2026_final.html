@@ -132,6 +132,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 .chk-text{font-size:12px;color:#1a1a1a;line-height:1.6;}
 .chk-note{display:block;font-size:10px;color:#888780;}
 .chk-item input:checked + .chk-text{color:#b4b2a9;text-decoration:line-through;}
+.day-hd{cursor:pointer;}
+.pay-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:500;color:#854F0B;background:#FAEEDA;border-radius:10px;padding:2px 8px;}
+.pay-note{font-size:10px;color:#888780;margin-left:6px;}
 </style>
 </head>
 <body>
@@ -257,8 +260,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
 </div>
 
 <div id="sec-schedule" class="sec active">
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-hd">
+  <div class="day-card">
+    <div class="day-hd" onclick="toggleDay(this.parentElement)">
       <div class="day-badge" style="background:#E6F1FB;color:#0C447C;"><div>11/3</div><div style="font-size:9px;">火</div></div>
       <div class="day-info"><div class="day-title">到着・夜の予定</div><div class="day-date">羽田 11:40発 → 石垣 15:00着</div></div>
       <i class="ti ti-chevron-down chevron"></i>
@@ -266,32 +269,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
     <div class="day-body"><ul class="act-list">
       <li class="act-item"><i class="ti ti-plane-departure act-ic" style="color:#185FA5"></i><div><div>ANA NH091 羽田T2 11:40発 → 石垣 15:00着 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">予約番号：DJQGXX · エコノミーK</div></div></li>
       <li class="act-item"><i class="ti ti-car act-ic" style="color:#185FA5"></i><div><div>レンタカー受取：南国レンタカー 15:00 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">セレナ8人乗り×1台 · 石垣市字平得283 · TEL: 070-9483-3770 · 新石垣空港から無料送迎14分</div></div></li>
-      <li class="act-item"><i class="ti ti-building-store act-ic" style="color:#854F0B"></i><div><div>ユーグレナモール散策</div><div class="act-note">石垣島最大の商店街でショッピング・お土産チェック</div></div></li>
       <li class="act-item"><i class="ti ti-building act-ic" style="color:#0F6E56"></i><div><div>Sakura Cross Inn & Sauna Ishigaki チェックイン（16:00〜22:00）<span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">石垣島 美崎町11-1 3F · TEL: 03-6695-1270</div></div></li>
-      <li class="act-item"><i class="ti ti-music act-ic" style="color:#BA7517"></i><div><div>唄もーれ（ライブ居酒屋）18:30〜 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">¥5,000コース・飲み放題＋島料理10品・ライブ2回付き · 現金のみ · 各家族¥16,000</div><button class="price-btn" onclick="document.getElementById('utamore-modal').classList.add('open')"><i class="ti ti-receipt" style="font-size:10px"></i> 料金システムを見る</button></div></li>
+      <li class="act-item"><i class="ti ti-building-store act-ic" style="color:#854F0B"></i><div><div>ユーグレナモール散策</div><div class="act-note">ホテルから徒歩圏 · 石垣島最大の商店街でショッピング・お土産チェック</div></div></li>
+      <li class="act-item"><i class="ti ti-music act-ic" style="color:#BA7517"></i><div><div>唄もーれ（ライブ居酒屋）18:30〜 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">飲み放題＋島料理10品・ライブ2回付き</div><div style="margin-top:4px;"><span class="pay-badge"><i class="ti ti-cash" style="font-size:10px"></i> 現地払い</span><span class="pay-note">現金のみ</span></div></div></li>
     </ul></div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-hd">
+  <div class="day-card">
+    <div class="day-hd" onclick="toggleDay(this.parentElement)">
       <div class="day-badge" style="background:#E1F5EE;color:#085041;"><div>11/4</div><div style="font-size:9px;">水</div></div>
       <div class="day-info"><div class="day-title">北部一周デー</div><div class="day-date">8:00頃出発 · 川平湾 · 幻の島 · 平久保崎 · サンセットビーチ · 星空ツアー</div></div>
       <i class="ti ti-chevron-down chevron"></i>
     </div>
     <div class="day-body"><ul class="act-list">
       <li class="act-item"><i class="ti ti-coffee act-ic" style="color:#854F0B"></i><div><div>朝食 8:00 ホテル出発</div><div class="act-note">前夜コンビニ調達のおにぎり・パンで済ませる</div></div></li>
-      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>川平湾 グラスボート 9:00〜9:30 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">海邦マリン · 集合08:50 · 沖縄県石垣市川平912-1 · TEL: 0980-87-9900<br>大きな6枚ガラスでサンゴと熱帯魚を観察（所要約30分）· 濡れず雨の日もOK</div><div class="act-note" style="margin-top:3px;">料金合計 <strong>¥13,900</strong>（現地払い）· 大人1,650円×6 · 小人800円×5 · 幼児0円×2 · キャンセル締切：当日09:00まで</div></div></li>
+      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>川平湾 グラスボート 9:00〜9:30 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">海邦マリン · 集合08:50 · 沖縄県石垣市川平912-1 · TEL: 0980-87-9900<br>大きな6枚ガラスでサンゴと熱帯魚を観察（所要約30分）· 濡れず雨の日もOK</div><div class="act-note">キャンセル締切：当日09:00まで</div><div style="margin-top:4px;"><span class="pay-badge"><i class="ti ti-cash" style="font-size:10px"></i> 現地払い</span></div></div></li>
       <li class="act-item"><i class="ti ti-tools-kitchen-2 act-ic" style="color:#0F6E56"></i><div><div>カビラマルシェ 9:30〜11:15</div><div class="act-note">川平湾エリアでランチ · 11:15には出発（ベッセルホテルへ約35分）</div></div></li>
-      <li class="act-item"><i class="ti ti-ripple act-ic" style="color:#1D9E75"></i><div><div>幻の島＆ウミガメorマンタ シュノーケリング 12:15〜15:45 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">集合12:15 ベッセルホテル前（〒907-0013 石垣市浜崎町1-2-7）</div><div class="act-note" style="margin-top:3px;">料金合計 <strong>¥100,500</strong>（Maya立替・カード払い済）</div><button class="price-btn" onclick="document.getElementById('snorkel-modal').classList.add('open')" style="margin-top:4px;"><i class="ti ti-info-circle" style="font-size:10px"></i> 詳細・持ち物を見る</button></div></li>
+      <li class="act-item"><i class="ti ti-ripple act-ic" style="color:#1D9E75"></i><div><div>幻の島＆ウミガメorマンタ シュノーケリング 12:15〜15:45 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">集合12:15 ベッセルホテル前（〒907-0013 石垣市浜崎町1-2-7）</div><div class="act-note">支払い済み</div><button class="price-btn" onclick="document.getElementById('snorkel-modal').classList.add('open')" style="margin-top:4px;"><i class="ti ti-info-circle" style="font-size:10px"></i> 詳細・持ち物を見る</button></div></li>
       <li class="act-item"><i class="ti ti-telescope act-ic" style="color:#185FA5"></i><div><div>平久保崎灯台 〜17:00</div><div class="act-note">石垣島最北端・絶景スポット · 売店なし · 自販機（ドリンク）あり</div></div></li>
       <li class="act-item"><i class="ti ti-sunset-2 act-ic" style="color:#BA7517"></i><div><div>サンセットビーチ 〜18:00</div><div class="act-note">夕日鑑賞🌅 · 平久保崎から南下して戻る途中に立ち寄り</div></div></li>
       <li class="act-item"><i class="ti ti-car act-ic" style="color:#888780"></i><div><div>流れ星の丘へ移動 18:00〜</div><div class="act-note">サンセットビーチから車で数分</div></div></li>
-      <li class="act-item"><i class="ti ti-star act-ic" style="color:#BA7517"></i><div><div>流れ星の丘 星空ナイトツアー 20:30〜</div><div class="act-note">集合20:15 · 久宇良公民館 · TEL: 080-6480-2445 · 暖かい服装で · スマホ等の光る機器使用禁止 · 料金合計43,100円（現地後払い）</div></div></li>
+      <li class="act-item"><i class="ti ti-star act-ic" style="color:#BA7517"></i><div><div>流れ星の丘 星空ナイトツアー 20:30〜</div><div class="act-note">集合20:15 · 久宇良公民館 · TEL: 080-6480-2445 · 暖かい服装で · スマホ等の光る機器使用禁止</div><div style="margin-top:4px;"><span class="pay-badge"><i class="ti ti-cash" style="font-size:10px"></i> 現地払い</span><span class="pay-note">ツアー後に支払い</span></div></div></li>
     </ul></div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-hd">
+  <div class="day-card">
+    <div class="day-hd" onclick="toggleDay(this.parentElement)">
       <div class="day-badge" style="background:#FAEEDA;color:#633806;"><div>11/5</div><div style="font-size:9px;">木</div></div>
       <div class="day-info"><div class="day-title">竹富島</div><div class="day-date">8:00頃出発 · 水牛車 · コンドイビーチ · カイジ浜</div></div>
       <i class="ti ti-chevron-down chevron"></i>
@@ -305,27 +308,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
       <li class="act-item"><i class="ti ti-soup act-ic" style="color:#BA7517"></i><div><div>そば処 竹の子 11:00〜</div><div class="act-note">創業50年以上・評価4.4 · 車海老そば1日10食限定 · 11:00開店に合わせて入店 · 13名は2回転の可能性あり</div></div></li>
       <li class="act-item"><i class="ti ti-star act-ic" style="color:#BA7517"></i><div><div>カイジ浜（星砂の浜）12:00〜</div><div class="act-note">星の形の砂を探す体験 · お土産の星砂もここで</div></div></li>
       <li class="act-item"><i class="ti ti-shopping-bag act-ic" style="color:#888780"></i><div><div>島内散策・お土産 12:30〜</div><div class="act-note">ミンサー織り・島ぞうりなどを物色 · 自転車返却13:00（竹富観光センターへ、港乗り捨て不可）</div></div></li>
-      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>竹富港発 14:00〜</div><div class="act-note">定期便で石垣島へ（約15分）· 港へはシャトルバスor徒歩15〜20分or巡回バス300円（前日要電話予約：0980-85-2154）</div></div></li>
+      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>竹富港発 14:00〜</div><div class="act-note">定期便で石垣島へ（約15分）· 港へはシャトルバスor徒歩15〜20分or巡回バス（現地払い・前日要電話予約：0980-85-2154）</div></div></li>
       <li class="act-item"><i class="ti ti-home act-ic" style="color:#0F6E56"></i><div><div>ホテル帰着・休憩 15:00〜</div><div class="act-note">翌日の西表島ツアーに備えてゆっくり</div></div></li>
     </ul></div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-hd">
+  <div class="day-card">
+    <div class="day-hd" onclick="toggleDay(this.parentElement)">
       <div class="day-badge" style="background:#E1F5EE;color:#085041;"><div>11/6</div><div style="font-size:9px;">金</div></div>
       <div class="day-info"><div class="day-title">西表島</div><div class="day-date">7:30ホテル出発 · 8:00フェリー · ピナイサーラの滝 · 水牛観光（のんぷら）</div></div>
       <i class="ti ti-chevron-down chevron"></i>
     </div>
     <div class="day-body"><ul class="act-list">
       <li class="act-item"><i class="ti ti-coffee act-ic" style="color:#854F0B"></i><div><div>朝食 7:30 ホテル出発</div><div class="act-note">前夜コンビニ調達のおにぎり・パンで済ませる</div></div></li>
-      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>石垣港 離島ターミナル → 西表島上原港 8:00発 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">八重山観光フェリー · 所要約40分 · 大人3,180円 / 小人1,600円</div></div></li>
-      <li class="act-item"><i class="ti ti-kayak act-ic" style="color:#0F6E56"></i><div><div>のんぷら「ピナイサーラの滝＆水牛観光」<span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">西表島最大の滝（落差54m）へカヌーで向かい、水牛観光もセット</div><div class="act-note" style="margin-top:3px;">Onishi 48,000円 / Kashiwagi 46,500円 / Sato 48,500円（各自現地払い）</div><button class="price-btn" onclick="document.getElementById('nonpura-modal').classList.add('open')" style="margin-top:4px;"><i class="ti ti-info-circle" style="font-size:10px"></i> 詳細・持ち物を見る</button></div></li>
-      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>西表島上原港 → 石垣港 17:05発 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">八重山観光フェリー · 所要約40分 · 大人3,180円 / 小人1,600円</div></div></li>
+      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>石垣港 離島ターミナル → 西表島上原港 8:00発 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">八重山観光フェリー · 所要約40分 · 支払い済み</div></div></li>
+      <li class="act-item"><i class="ti ti-kayak act-ic" style="color:#0F6E56"></i><div><div>のんぷら「ピナイサーラの滝＆水牛観光」<span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">西表島最大の滝（落差54m）へカヌーで向かい、水牛観光もセット</div><div style="margin-top:4px;"><span class="pay-badge"><i class="ti ti-cash" style="font-size:10px"></i> 現地払い</span><span class="pay-note">各家族で支払い</span></div><button class="price-btn" onclick="document.getElementById('nonpura-modal').classList.add('open')" style="margin-top:4px;"><i class="ti ti-info-circle" style="font-size:10px"></i> 詳細・持ち物を見る</button></div></li>
+      <li class="act-item"><i class="ti ti-ship act-ic" style="color:#185FA5"></i><div><div>西表島上原港 → 石垣港 17:05発 <span class="confirmed-badge" style="margin-left:4px;"><i class="ti ti-check" style="font-size:10px"></i> 予約済み</span></div><div class="act-note">八重山観光フェリー · 所要約40分 · 支払い済み</div></div></li>
     </ul></div>
   </div>
 
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-hd">
+  <div class="day-card">
+    <div class="day-hd" onclick="toggleDay(this.parentElement)">
       <div class="day-badge" style="background:#FCEBEB;color:#791F1F;"><div>11/7</div><div style="font-size:9px;">土</div></div>
       <div class="day-info"><div class="day-title">帰宅日</div><div class="day-date">石垣 12:20発 → 羽田 14:55着</div></div>
       <i class="ti ti-chevron-down chevron"></i>
@@ -882,7 +885,7 @@ const tripQA = [
 
   // === 日程・アクティビティ ===
   {keys:['11/3','3日','初日','到着日'],
-   ans:'11/3（火）：羽田11:40発→石垣15:00着→レンタカー受取15:00→ユーグレナモール散策→ホテルチェックイン16:00〜→唄もーれ18:30〜（ライブ居酒屋）'},
+   ans:'11/3（火）：羽田11:40発→石垣15:00着→レンタカー受取15:00→ホテルチェックイン16:00〜→ユーグレナモール散策→唄もーれ18:30〜（ライブ居酒屋）'},
   {keys:['11/4','4日','2日目','北部'],
    ans:'11/4（水）：8:00ホテル出発→川平湾グラスボート9:00（8:50集合）→カビラマルシェでランチ9:30〜11:15→幻の島＆ウミガメorマンタ シュノーケリング12:15〜15:45（ベッセルホテル前集合）→平久保崎灯台〜17:00→サンセットビーチ〜18:00→流れ星の丘 星空ツアー20:30（20:15集合）'},
   {keys:['11/5','5日','3日目','竹富'],
@@ -1226,15 +1229,8 @@ function showAllDays() {
 <div class="modal-overlay" id="nonpura-modal" onclick="this.classList.remove('open')">
   <div class="modal-inner" onclick="event.stopPropagation()" style="max-height:90vh;overflow-y:auto;padding:16px 20px;min-width:280px;max-width:360px;">
     <div style="font-size:14px;font-weight:500;color:#1a1a1a;margin-bottom:12px;">🛶 のんぷら 詳細</div>
+    
     <div style="font-size:11px;color:#5f5e5a;line-height:1.8;">
-      <div style="font-weight:500;color:#1a1a1a;margin-bottom:4px;">💰 料金</div>
-      大人：13,500円<br>
-      小学生：10,500円<br>
-      幼児（3歳）：9,000円<br>
-      幼児（1歳）：500円<br>
-      各自現地払い
-    </div>
-    <div style="margin-top:12px;font-size:11px;color:#5f5e5a;line-height:1.8;">
       <div style="font-weight:500;color:#1a1a1a;margin-bottom:4px;">🎒 持ち物・服装</div>
       ・防水バッグ（防水のもの必須）<br>
       ・マリンシューズ推奨<br>
