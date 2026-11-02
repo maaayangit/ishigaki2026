@@ -637,10 +637,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
       </thead>
       <tbody>
         <tr style="border-top:0.5px solid #f0ede8;">
-          <td style="padding:8px 14px;color:#1a1a1a;">唄もーれ（11/3）<br><span style="color:#888780;font-size:10px;">現金のみ</span></td>
-          <td style="text-align:right;padding:8px 14px;color:#1a1a1a;">16,000円</td>
-          <td style="text-align:right;padding:8px 14px;color:#1a1a1a;">16,000円</td>
-          <td style="text-align:right;padding:8px 14px;color:#1a1a1a;">16,000円</td>
+          <td style="padding:8px 14px;color:#1a1a1a;">唄もーれ（11/3）<br><span style="color:#888780;font-size:10px;">現金のみ · 大人5,000円×2・子供3,500円×2（乳児は無料）· 合計51,000円</span></td>
+          <td style="text-align:right;padding:8px 14px;color:#1a1a1a;">17,000円</td>
+          <td style="text-align:right;padding:8px 14px;color:#1a1a1a;">17,000円</td>
+          <td style="text-align:right;padding:8px 14px;color:#1a1a1a;">17,000円</td>
         </tr>
         <tr style="border-top:0.5px solid #f0ede8;">
           <td style="padding:8px 14px;color:#1a1a1a;">流れ星の丘 星空ツアー（11/4）<br><span style="color:#888780;font-size:10px;">現地後払い · 予約番号：9QXBM108<br>当日は家族ごとに支払い（記念撮影1,500円は3家族で500円ずつ）</span></td>
@@ -754,9 +754,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
       <tfoot>
         <tr style="border-top:0.5px solid #d3d1c7;background:#f5f5f0;">
           <td style="padding:8px 14px;font-weight:500;color:#1a1a1a;">各家族合計（現地払い分）</td>
-          <td style="text-align:right;padding:8px 14px;font-weight:500;color:#1a1a1a;">84,200円</td>
-          <td style="text-align:right;padding:8px 14px;font-weight:500;color:#1a1a1a;">79,100円</td>
-          <td style="text-align:right;padding:8px 14px;font-weight:500;color:#1a1a1a;">84,700円</td>
+          <td style="text-align:right;padding:8px 14px;font-weight:500;color:#1a1a1a;">85,200円</td>
+          <td style="text-align:right;padding:8px 14px;font-weight:500;color:#1a1a1a;">80,100円</td>
+          <td style="text-align:right;padding:8px 14px;font-weight:500;color:#1a1a1a;">85,700円</td>
         </tr>
       </tfoot>
     </table>
@@ -801,7 +801,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku
     <label class="chk-item"><input type="checkbox" data-k="kidsclothes" onchange="saveCheck(this)"><span class="chk-text">着替え多め・子ども用の帽子</span></label>
   </div>
   <div class="chk-group"><div class="chk-gtitle">当日の朝に確認</div>
-    <label class="chk-item"><input type="checkbox" data-k="d1" onchange="saveCheck(this)"><span class="chk-text">11/3 羽田T2に9:40〜10:00集合 · 夜の唄もーれは現金16,000円/家族</span></label>
+    <label class="chk-item"><input type="checkbox" data-k="d1" onchange="saveCheck(this)"><span class="chk-text">11/3 羽田T2に9:40〜10:00集合 · 夜の唄もーれは現金17,000円/家族</span></label>
     <label class="chk-item"><input type="checkbox" data-k="d2" onchange="saveCheck(this)"><span class="chk-text">11/4 8:00出発 · 水着着用・飲み物1人1本 · 夜用の羽織り<span class="chk-note">星空ツアーは光る機器禁止</span></span></label>
     <label class="chk-item"><input type="checkbox" data-k="d3" onchange="saveCheck(this)"><span class="chk-text">11/5 8:30フェリー · 自転車返却13:00 · 竹富港14:00発</span></label>
     <label class="chk-item"><input type="checkbox" data-k="d4" onchange="saveCheck(this)"><span class="chk-text">11/6 7:30出発 · 防水バッグ・着替え · のんぷら代を持参<span class="chk-note">帰りは上原港17:05発</span></span></label>
@@ -897,9 +897,9 @@ const tripQA = [
 
   // === 唄もーれ ===
   {keys:['唄もーれ','ライブ居酒屋','民謡'],
-   ans:'11/3（火）18:30〜。¥5,000コース（飲み放題＋島料理10品・ライブ2回付き）。各家族¥16,000、現地払い・現金のみ。'},
+   ans:'11/3（火）18:30〜。¥5,000コース（飲み放題＋島料理10品・ライブ2回付き）。各家族¥17,000、現地払い・現金のみ。'},
   {keys:['唄もーれ料金','唄もーれいくら'],
-   ans:'大人¥5,000・子供（3歳〜小学生）¥3,000です。各家族¥16,000（現地払い・現金のみ）。'},
+   ans:'大人¥5,000・子供¥3,500です（乳児は無料）。各家族¥17,000・3家族合計¥51,000（現地払い・現金のみ）。'},
 
   // === 星空ツアー ===
   {keys:['流れ星','星空','星','ナイトツアー','ほしぞら'],
@@ -953,7 +953,7 @@ const tripQA = [
   {keys:['精算','振込','Onishi精算'],
    ans:'Mayaへの振込額（旅行後）：Onishi Family 252,372円、Sato Family 79,320円。家族別・項目別の内訳は「精算」タブで確認できます。'},
   {keys:['現金','いくら現金','キャッシュ'],
-   ans:'現地払いは家族あたり約8万円：唄もーれ16,000円（現金のみ）・グラスボート・星空ツアー・のんぷら。カード可否が未確認のものもあるので現金で用意しておくと安心です。'},
+   ans:'現地払いは家族あたり約8万円：唄もーれ17,000円（現金のみ）・グラスボート・星空ツアー・のんぷら。カード可否が未確認のものもあるので現金で用意しておくと安心です。'},
   {keys:['カード','クレジット','キャッシュレス'],
    ans:'Sakura Cross Inn・大型スーパー（マックスバリュなど）・観光地の売店はカード対応。ただし離島の小さな飲食店・フェリー乗り場は現金のみが多いです。'},
 
@@ -1034,11 +1034,11 @@ const faqs=[
   {cat:'flight',q:'石垣に着いたらどうすればいい？',a:'15:00に新石垣空港着。荷物受け取り後、レンタカーで石垣市内へ移動します。Sakura Cross Inn & Sauna Ishigakiは美崎町11-1にあります。チェックインは16:00〜22:00です。'},
   {cat:'hotel',q:'ホテルはどんな部屋？',a:'160㎡のプライベートヴィラで最大10名宿泊可能。ダブルベッド5台、ロウリュサウナ、外気浴テラス付きです。2家族でゆったり使えます。'},
   {cat:'hotel',q:'チェックインは何時？',a:'16:00〜22:00です。11/3の到着が15:00なので、空港からレンタカーで移動して荷物を置いたあと、夜の予定へ向かう流れになります。'},
-  {cat:'schedule',q:'唄もーれって何？',a:'唄もーれは石垣島の民謡ライブ居酒屋。11/3（火）18:30〜。¥5,000コース（飲み放題＋島料理10品・ライブ2回付き）。各家族¥16,000、現地払い・現金のみ。'},
+  {cat:'schedule',q:'唄もーれって何？',a:'唄もーれは石垣島の民謡ライブ居酒屋。11/3（火）18:30〜。¥5,000コース（飲み放題＋島料理10品・ライブ2回付き）。各家族¥17,000、現地払い・現金のみ。'},
   {cat:'schedule',q:'竹富島と西表島はなぜ別の日？',a:'西表島は移動・アクティビティ合わせると丸一日かかります。竹富島は石垣から10分とアクセスが良いので、余裕を持って楽しめるよう別日にしました。'},
   {cat:'schedule',q:'子どもはカヌーに乗れるの？',a:'のんぷらのツアーはカヌーも水牛渡しも13名全員参加OK（確認済み）。Sato Familyは親子3人乗りのカヌーです。滝までのトレッキングは5歳以上が対象です。'},
-  {cat:'money',q:'旅行の費用はいくら？',a:'家族別の内訳は「精算」タブにあります。Mayaへの振込（旅行後）：Onishi 252,372円・Sato 79,320円。現地払い：Onishi 84,200円・Kashiwagi 79,100円・Sato 84,700円。食事（唄もーれ以外）・お土産は別です。'},
-  {cat:'money',q:'現金が必要な場面は？',a:'現地払いは家族あたり約8万円（唄もーれ16,000円は現金のみ・グラスボート・星空ツアー・のんぷら）。カードが使えるか未確認のものもあるので、この分＋離島の食堂・売店用に現金を用意しておくと安心です。'},
+  {cat:'money',q:'旅行の費用はいくら？',a:'家族別の内訳は「精算」タブにあります。Mayaへの振込（旅行後）：Onishi 252,372円・Sato 79,320円。現地払い：Onishi 85,200円・Kashiwagi 80,100円・Sato 85,700円。食事（唄もーれ以外）・お土産は別です。'},
+  {cat:'money',q:'現金が必要な場面は？',a:'現地払いは家族あたり約8万円（唄もーれ17,000円は現金のみ・グラスボート・星空ツアー・のんぷら）。カードが使えるか未確認のものもあるので、この分＋離島の食堂・売店用に現金を用意しておくと安心です。'},
   {cat:'money',q:'クレジットカードはどこで使える？',a:'Sakura Cross Inn・大型スーパー（マックスバリュなど）・観光地の売店などは基本カード対応。ただし離島の小さな飲食店は現金のみが多いです。'},
   {cat:'gear',q:'11月の石垣って何を着ればいい？',a:'11月の石垣島は最高気温25〜27℃、朝晩は22℃前後とやや涼しい日も。半袖＋1枚羽織れるものがちょうどよいです。急な雨もあるのでコンパクトな雨具も便利。'},
   {cat:'gear',q:'マリンアクティビティに必要な持ち物は？',a:'シュノーケル・ライフジャケットはレンタル可能な場合が多いですが、水着・ラッシュガード・マリンシューズは持参推奨。カメラはぜひ防水ケースを。'},
